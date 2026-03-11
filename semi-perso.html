@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Semi Perso</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="menu-gauche">
+<a href="index.html">Accueil</a>
+<a href="#">Produits</a>
+<a href="#">Panier</a>
+</div>
+
+<div class="logo">
+<a href="index.html">
+<img src="logo.png">
+</a>
+</div>
+
+<div class="menu-droite">
+<a href="#">S'inscrire / Connexion</a>
+</div>
+
+</header>
+
+
+<section class="configurateur">
+
+<h1>Configurer ton cache allumage</h1>
+
+<div class="config-container">
+
+<div id="viewer"></div>
+
+
+<div class="options">
+
+<h3>Moteur</h3>
+
+<select>
+<option>AM6</option>
+<option>€3</option>
+</select>
+
+
+<h3>Couleur</h3>
+
+<div class="couleurs">
+
+<div class="color" data-color="#ff0000" style="background:#ff0000"></div>
+<div class="color" data-color="#0000ff" style="background:#0000ff"></div>
+<div class="color" data-color="#00ff00" style="background:#00ff00"></div>
+<div class="color" data-color="#ffffff" style="background:#ffffff"></div>
+<div class="color" data-color="#000000" style="background:#000000"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="viewer.js"></script>
+
+</body>
+</html>
