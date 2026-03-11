@@ -388,3 +388,52 @@ border-radius:6px;
 cursor:pointer;
 
 }
+
+
+
+/* ANIMATION PRODUITS */
+
+.produit{
+
+opacity:0;
+transform:translateY(40px);
+
+transition:0.6s;
+
+}
+
+.produit.visible{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+
+
+/* BOUTON PANIER */
+
+.produit button{
+
+margin-top:10px;
+
+padding:10px 15px;
+
+background:#a855f7;
+
+border:none;
+
+border-radius:6px;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+.produit button:hover{
+
+background:#9333ea;
+
+}
+
