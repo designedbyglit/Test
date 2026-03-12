@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
 
 </head>
 
@@ -45,28 +46,16 @@
 
 <div id="viewer"></div>
 
-
 <div class="options">
 
-<h3>Moteur</h3>
+<h3>Couleur corps</h3>
+<input type="color" id="colorCorps">
 
-<select>
-<option>AM6</option>
-<option>€3</option>
-</select>
+<h3>Couleur contour</h3>
+<input type="color" id="colorContour">
 
-
-<h3>Couleur</h3>
-
-<div class="couleurs">
-
-<div class="color" data-color="#ff0000" style="background:#ff0000"></div>
-<div class="color" data-color="#0000ff" style="background:#0000ff"></div>
-<div class="color" data-color="#00ff00" style="background:#00ff00"></div>
-<div class="color" data-color="#ffffff" style="background:#ffffff"></div>
-<div class="color" data-color="#000000" style="background:#000000"></div>
-
-</div>
+<h3>Couleur logo</h3>
+<input type="color" id="colorLogo">
 
 </div>
 
