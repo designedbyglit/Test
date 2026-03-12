@@ -1,21 +1,16 @@
 let scene = new THREE.Scene()
-
 scene.background = new THREE.Color(0x111111)
-
-
 
 let camera = new THREE.PerspectiveCamera(
 75,
-600 / 400,
+600/400,
 0.1,
 1000
 )
 
-camera.position.z = 4
+camera.position.set(0,0,120)
 
-
-
-let renderer = new THREE.WebGLRenderer({ antialias: true })
+let renderer = new THREE.WebGLRenderer({antialias:true})
 renderer.setSize(600,400)
 
 document.getElementById("viewer").appendChild(renderer.domElement)
@@ -25,59 +20,100 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 /* LUMIERES */
 
 let light1 = new THREE.DirectionalLight(0xffffff,1)
-light1.position.set(5,5,5)
+light1.position.set(100,100,100)
+
 scene.add(light1)
 
-let light2 = new THREE.AmbientLight(0xffffff,0.5)
+let light2 = new THREE.AmbientLight(0xffffff,0.6)
 scene.add(light2)
 
 
 
-/* PIECE TEST */
+/* STL LOADER */
 
-let geometry = new THREE.BoxGeometry(1.5,1,1)
+let loader = new THREE.STLLoader()
+
+let corps
+let contour
+let logo
+
+
+
+/* CORPS */
+
+loader.load("models/piece_corps.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
 color:0x7a00ff,
-metalness:0.2,
-roughness:0.4
+roughness:0.4,
+metalness:0.2
 })
 
-let piece = new THREE.Mesh(geometry,material)
+corps = new THREE.Mesh(geometry,material)
 
-scene.add(piece)
+corps.rotation.x = -Math.PI/2
+
+scene.add(corps)
+
+})
+
+
+
+/* CONTOUR */
+
+loader.load("models/piece_contour.STL", function (geometry){
+
+let material = new THREE.MeshStandardMaterial({
+color:0xffffff
+})
+
+contour = new THREE.Mesh(geometry,material)
+
+contour.rotation.x = -Math.PI/2
+
+scene.add(contour)
+
+})
+
+
+
+/* LOGO */
+
+loader.load("models/piece_logo.STL", function (geometry){
+
+let material = new THREE.MeshStandardMaterial({
+color:0x000000
+})
+
+logo = new THREE.Mesh(geometry,material)
+
+logo.rotation.x = -Math.PI/2
+
+scene.add(logo)
+
+})
 
 
 
 /* ROTATION SOURIS */
 
 let isDragging = false
-let previousMousePosition = { x:0, y:0 }
+let prev = {x:0,y:0}
 
-renderer.domElement.addEventListener("mousedown", () => {
-isDragging = true
-})
+renderer.domElement.addEventListener("mousedown",()=>isDragging=true)
+renderer.domElement.addEventListener("mouseup",()=>isDragging=false)
 
-renderer.domElement.addEventListener("mouseup", () => {
-isDragging = false
-})
-
-renderer.domElement.addEventListener("mousemove", (e)=>{
+renderer.domElement.addEventListener("mousemove",(e)=>{
 
 if(!isDragging) return
 
-let deltaMove = {
-x: e.offsetX - previousMousePosition.x,
-y: e.offsetY - previousMousePosition.y
-}
+let dx = e.offsetX - prev.x
+let dy = e.offsetY - prev.y
 
-piece.rotation.y += deltaMove.x * 0.01
-piece.rotation.x += deltaMove.y * 0.01
+scene.rotation.y += dx * 0.01
+scene.rotation.x += dy * 0.01
 
-previousMousePosition = {
-x: e.offsetX,
-y: e.offsetY
-}
+prev = {x:e.offsetX,y:e.offsetY}
 
 })
 
@@ -87,23 +123,29 @@ y: e.offsetY
 
 renderer.domElement.addEventListener("wheel",(e)=>{
 
-camera.position.z += e.deltaY * 0.01
+camera.position.z += e.deltaY * 0.05
 
 })
 
 
 
-/* COULEURS */
+/* CHANGEMENT COULEURS */
 
-document.querySelectorAll(".color").forEach(c=>{
+document.getElementById("colorCorps").addEventListener("input",(e)=>{
 
-c.addEventListener("click",()=>{
-
-let color = c.dataset.color
-
-piece.material.color.set(color)
+if(corps) corps.material.color.set(e.target.value)
 
 })
+
+document.getElementById("colorContour").addEventListener("input",(e)=>{
+
+if(contour) contour.material.color.set(e.target.value)
+
+})
+
+document.getElementById("colorLogo").addEventListener("input",(e)=>{
+
+if(logo) logo.material.color.set(e.target.value)
 
 })
 
