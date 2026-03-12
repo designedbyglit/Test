@@ -1,441 +1,3 @@
-body{
-
-margin:0;
-font-family:Arial;
-background:#0a0a0a;
-color:white;
-
-}
-
-
-
-/* HEADER */
-
-header{
-
-position:fixed;
-top:0;
-width:100%;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:15px 40px;
-
-background:rgba(0,0,0,0.8);
-backdrop-filter:blur(10px);
-
-z-index:1000;
-
-}
-
-
-
-/* MENU GAUCHE */
-
-.menu-gauche a{
-
-margin-right:25px;
-text-decoration:none;
-color:white;
-font-size:16px;
-
-transition:0.3s;
-
-}
-
-.menu-gauche a:hover{
-
-color:#a855f7;
-
-}
-
-
-
-/* MENU DROITE */
-
-.menu-droite a{
-
-text-decoration:none;
-color:white;
-
-}
-
-
-
-/* LOGO */
-
-.logo{
-
-position:absolute;
-left:50%;
-transform:translateX(-50%);
-
-}
-
-.logo img{
-
-height:40px;
-
-}
-
-
-
-/* SECTION CHOIX */
-
-.choix{
-
-display:flex;
-margin-top:80px;
-
-}
-
-
-
-.carte{
-
-position:relative;
-width:50%;
-overflow:hidden;
-
-}
-
-
-
-.carte img{
-
-width:100%;
-height:450px;
-
-object-fit:cover;
-
-transition:0.4s;
-
-}
-
-
-
-.carte:hover img{
-
-transform:scale(1.08);
-
-}
-
-
-
-/* TEXTE SUR IMAGE */
-
-.overlay{
-
-position:absolute;
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%);
-
-font-size:35px;
-
-background:rgba(0,0,0,0.5);
-
-padding:20px 40px;
-
-border-radius:10px;
-
-}
-
-
-
-/* SECTION PRODUITS */
-
-.produits{
-
-padding:80px 40px;
-
-text-align:center;
-
-}
-
-
-
-.produits h2{
-
-font-size:40px;
-margin-bottom:40px;
-
-}
-
-
-
-/* GRILLE PRODUITS */
-
-.grille{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:30px;
-
-}
-
-
-
-/* PRODUIT */
-
-.produit{
-
-background:#111;
-
-border-radius:10px;
-
-padding:15px;
-
-transition:0.3s;
-
-}
-
-
-
-.produit img{
-
-width:100%;
-height:200px;
-
-object-fit:cover;
-
-border-radius:8px;
-
-}
-
-
-
-.produit:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
-.produit h3{
-
-margin:10px 0 5px 0;
-
-}
-
-
-
-.produit p{
-
-color:#a855f7;
-
-font-weight:bold;
-
-}
-
-/* PAGE PRODUIT */
-
-.page-produit{
-
-padding-top:120px;
-padding-left:40px;
-padding-right:40px;
-
-}
-
-.produit-container{
-
-display:flex;
-gap:50px;
-
-align-items:center;
-
-}
-
-.image-produit img{
-
-width:450px;
-border-radius:10px;
-
-}
-
-.info-produit{
-
-max-width:400px;
-
-}
-
-.prix{
-
-font-size:25px;
-color:#a855f7;
-
-margin:10px 0;
-
-}
-
-.cta{
-
-margin-top:20px;
-
-padding:15px 30px;
-
-background:#a855f7;
-
-border:none;
-
-border-radius:8px;
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-}
-
-.cta:hover{
-
-background:#9333ea;
-
-}
-
-/* CONFIGURATEUR */
-
-.configurateur{
-
-padding-top:120px;
-text-align:center;
-
-}
-
-.config-container{
-
-display:flex;
-justify-content:center;
-gap:50px;
-margin-top:40px;
-
-}
-
-#viewer{
-
-width:600px;
-height:400px;
-background:#111;
-border-radius:10px;
-
-}
-
-
-.options{
-
-text-align:left;
-
-}
-
-.couleurs{
-
-display:flex;
-gap:10px;
-margin-top:10px;
-
-}
-
-.color{
-
-width:30px;
-height:30px;
-border-radius:50%;
-cursor:pointer;
-
-}
-
-/* FORMULAIRE */
-
-.formulaire{
-
-padding-top:120px;
-width:400px;
-margin:auto;
-
-}
-
-form{
-
-display:flex;
-flex-direction:column;
-gap:10px;
-
-}
-
-input,textarea{
-
-padding:10px;
-border:none;
-border-radius:5px;
-
-}
-
-button{
-
-padding:12px;
-background:#a855f7;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-
-}
-
-
-
-/* ANIMATION PRODUITS */
-
-.produit{
-
-opacity:0;
-transform:translateY(40px);
-
-transition:0.6s;
-
-}
-
-.produit.visible{
-
-opacity:1;
-transform:translateY(0);
-
-}
-
-
-
-/* BOUTON PANIER */
-
-.produit button{
-
-margin-top:10px;
-
-padding:10px 15px;
-
-background:#a855f7;
-
-border:none;
-
-border-radius:6px;
-
-color:white;
-
-cursor:pointer;
-
-}
-
-.produit button:hover{
-
-background:#9333ea;
-
-  
 .configurateur{
 
 padding-top:120px;
@@ -445,6 +7,7 @@ padding-top:120px;
 .config-container{
 
 display:flex;
+
 height:80vh;
 
 }
@@ -452,7 +15,6 @@ height:80vh;
 #viewer{
 
 flex:3;
-background:#e5e5e5;
 
 }
 
@@ -468,22 +30,25 @@ box-shadow:-5px 0 20px rgba(0,0,0,0.1);
 
 }
 
-.options h3{
+.options h2{
 
-margin-bottom:10px;
+margin-bottom:20px;
 
 }
 
 .options input{
 
 width:100%;
+
 height:40px;
 
-margin-bottom:20px;
+margin-top:20px;
 
 }
 
 .options button{
+
+margin-top:20px;
 
 padding:12px;
 
@@ -493,7 +58,7 @@ color:white;
 
 border:none;
 
-border-radius:5px;
+border-radius:6px;
 
 cursor:pointer;
 
@@ -501,9 +66,6 @@ cursor:pointer;
 
 .options button:hover{
 
-background:#5c00cc;
+background:#5f00c9;
 
 }
-
-}
-
