@@ -1,5 +1,8 @@
 let scene = new THREE.Scene()
-scene.background = new THREE.Color(0x111111)
+
+scene.background = new THREE.Color(0xf0f0f0)
+
+
 
 let camera = new THREE.PerspectiveCamera(
 75,
@@ -8,24 +11,53 @@ let camera = new THREE.PerspectiveCamera(
 1000
 )
 
-camera.position.set(0,0,120)
+camera.position.set(0,40,120)
+
+
 
 let renderer = new THREE.WebGLRenderer({antialias:true})
+
 renderer.setSize(600,400)
+
+renderer.shadowMap.enabled = true
 
 document.getElementById("viewer").appendChild(renderer.domElement)
 
 
 
-/* LUMIERES */
+/* LUMIERES STUDIO */
 
 let light1 = new THREE.DirectionalLight(0xffffff,1)
-light1.position.set(100,100,100)
+
+light1.position.set(100,200,100)
+
+light1.castShadow = true
 
 scene.add(light1)
 
+
+
 let light2 = new THREE.AmbientLight(0xffffff,0.6)
+
 scene.add(light2)
+
+
+
+/* SOL POUR OMBRE */
+
+let planeGeometry = new THREE.PlaneGeometry(500,500)
+
+let planeMaterial = new THREE.ShadowMaterial({opacity:0.2})
+
+let plane = new THREE.Mesh(planeGeometry,planeMaterial)
+
+plane.rotation.x = -Math.PI/2
+
+plane.position.y = -10
+
+plane.receiveShadow = true
+
+scene.add(plane)
 
 
 
@@ -44,14 +76,18 @@ let logo
 loader.load("models/piece_corps.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
+
 color:0x7a00ff,
-roughness:0.4,
-metalness:0.2
+roughness:0.35,
+metalness:0.1
+
 })
 
 corps = new THREE.Mesh(geometry,material)
 
 corps.rotation.x = -Math.PI/2
+
+corps.castShadow = true
 
 scene.add(corps)
 
@@ -64,12 +100,17 @@ scene.add(corps)
 loader.load("models/piece_contour.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
-color:0xffffff
+
+color:0xffffff,
+roughness:0.35
+
 })
 
 contour = new THREE.Mesh(geometry,material)
 
 contour.rotation.x = -Math.PI/2
+
+contour.castShadow = true
 
 scene.add(contour)
 
@@ -82,12 +123,17 @@ scene.add(contour)
 loader.load("models/piece_logo.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
-color:0x000000
+
+color:0x000000,
+roughness:0.35
+
 })
 
 logo = new THREE.Mesh(geometry,material)
 
 logo.rotation.x = -Math.PI/2
+
+logo.castShadow = true
 
 scene.add(logo)
 
@@ -100,8 +146,17 @@ scene.add(logo)
 let isDragging = false
 let prev = {x:0,y:0}
 
-renderer.domElement.addEventListener("mousedown",()=>isDragging=true)
-renderer.domElement.addEventListener("mouseup",()=>isDragging=false)
+renderer.domElement.addEventListener("mousedown",()=>{
+
+isDragging = true
+
+})
+
+renderer.domElement.addEventListener("mouseup",()=>{
+
+isDragging = false
+
+})
 
 renderer.domElement.addEventListener("mousemove",(e)=>{
 
@@ -129,7 +184,7 @@ camera.position.z += e.deltaY * 0.05
 
 
 
-/* CHANGEMENT COULEURS */
+/* COULEURS */
 
 document.getElementById("colorCorps").addEventListener("input",(e)=>{
 
@@ -148,6 +203,22 @@ document.getElementById("colorLogo").addEventListener("input",(e)=>{
 if(logo) logo.material.color.set(e.target.value)
 
 })
+
+
+
+/* EXPORT IMAGE */
+
+function exportImage(){
+
+let link = document.createElement("a")
+
+link.download = "piece_config.png"
+
+link.href = renderer.domElement.toDataURL()
+
+link.click()
+
+}
 
 
 
