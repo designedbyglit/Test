@@ -1,12 +1,12 @@
 let scene = new THREE.Scene()
 
-scene.background = new THREE.Color(0xf0f0f0)
+scene.background = new THREE.Color(0xe5e5e5)
 
 
 
 let camera = new THREE.PerspectiveCamera(
 75,
-600/400,
+window.innerWidth/window.innerHeight,
 0.1,
 1000
 )
@@ -16,7 +16,8 @@ camera.position.set(0,40,120)
 
 
 let renderer = new THREE.WebGLRenderer({antialias:true})
-renderer.setSize(600,400)
+
+renderer.setSize(window.innerWidth*0.75,window.innerHeight*0.8)
 
 renderer.shadowMap.enabled = true
 
@@ -24,16 +25,19 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 
 
-/* LUMIERES */
+/* LUMIERE STUDIO */
 
 let light1 = new THREE.DirectionalLight(0xffffff,1)
 
-light1.position.set(100,200,100)
+light1.position.set(200,200,200)
+
 light1.castShadow = true
 
 scene.add(light1)
 
-let light2 = new THREE.AmbientLight(0xffffff,0.6)
+
+
+let light2 = new THREE.AmbientLight(0xffffff,0.5)
 
 scene.add(light2)
 
@@ -43,7 +47,7 @@ scene.add(light2)
 
 let planeGeometry = new THREE.PlaneGeometry(500,500)
 
-let planeMaterial = new THREE.ShadowMaterial({opacity:0.2})
+let planeMaterial = new THREE.ShadowMaterial({opacity:0.25})
 
 let plane = new THREE.Mesh(planeGeometry,planeMaterial)
 
@@ -56,99 +60,63 @@ scene.add(plane)
 
 
 
-/* STL LOADER */
+/* STL */
 
 let loader = new THREE.STLLoader()
 
-let corps
-let contour
-let logo
+let pieces = []
 
+function chargerPiece(fichier,couleur){
 
-
-/* CORPS */
-
-loader.load("models/piece_corps.STL", function (geometry){
+loader.load("models/"+fichier,function(geometry){
 
 let material = new THREE.MeshStandardMaterial({
-color:0x7a00ff,
-roughness:0.35
-})
 
-corps = new THREE.Mesh(geometry,material)
-
-corps.rotation.x = -Math.PI/2
-
-scene.add(corps)
+color:couleur,
+roughness:0.35,
+metalness:0.1
 
 })
 
+let mesh = new THREE.Mesh(geometry,material)
 
+mesh.rotation.x = -Math.PI/2
 
-/* CONTOUR */
+mesh.castShadow = true
 
-loader.load("models/piece_contour.STL", function (geometry){
+scene.add(mesh)
 
-let material = new THREE.MeshStandardMaterial({
-color:0xffffff
-})
-
-contour = new THREE.Mesh(geometry,material)
-
-contour.rotation.x = -Math.PI/2
-
-scene.add(contour)
+pieces.push(mesh)
 
 })
 
+}
 
-
-/* LOGO */
-
-loader.load("models/piece_logo.STL", function (geometry){
-
-let material = new THREE.MeshStandardMaterial({
-color:0x000000
-})
-
-logo = new THREE.Mesh(geometry,material)
-
-logo.rotation.x = -Math.PI/2
-
-scene.add(logo)
-
-})
+chargerPiece("piece_corps.STL",0x7a00ff)
+chargerPiece("piece_contour.STL",0xffffff)
+chargerPiece("piece_logo.STL",0x000000)
 
 
 
-/* ROTATION SOURIS */
+/* ROTATION */
 
-let isDragging = false
-let prev = {x:0,y:0}
+let isDragging=false
+let prev={x:0,y:0}
 
-renderer.domElement.addEventListener("mousedown",()=>{
-
-isDragging = true
-
-})
-
-renderer.domElement.addEventListener("mouseup",()=>{
-
-isDragging = false
-
-})
+renderer.domElement.addEventListener("mousedown",()=>isDragging=true)
+renderer.domElement.addEventListener("mouseup",()=>isDragging=false)
 
 renderer.domElement.addEventListener("mousemove",(e)=>{
 
-if(!isDragging) return
+if(!isDragging)return
 
-let dx = e.offsetX - prev.x
-let dy = e.offsetY - prev.y
+let dx=e.offsetX-prev.x
+let dy=e.offsetY-prev.y
 
-scene.rotation.y += dx * 0.01
-scene.rotation.x += dy * 0.01
+scene.rotation.y+=dx*0.01
+scene.rotation.x+=dy*0.01
 
-prev = {x:e.offsetX,y:e.offsetY}
+prev={x:e.offsetX,y:e.offsetY}
 
 })
 
@@ -158,7 +126,7 @@ prev = {x:e.offsetX,y:e.offsetY}
 
 renderer.domElement.addEventListener("wheel",(e)=>{
 
-camera.position.z += e.deltaY * 0.05
+camera.position.z+=e.deltaY*0.05
 
 })
 
@@ -166,25 +134,23 @@ camera.position.z += e.deltaY * 0.05
 
 /* SELECTION PIECE */
 
-let raycaster = new THREE.Raycaster()
-let mouse = new THREE.Vector2()
+let raycaster=new THREE.Raycaster()
+let mouse=new THREE.Vector2()
 
-let selectedPiece = null
-
-
+let selected=null
 
 renderer.domElement.addEventListener("click",(event)=>{
 
-mouse.x = (event.offsetX / 600) * 2 - 1
-mouse.y = -(event.offsetY / 400) * 2 + 1
+mouse.x=(event.offsetX/renderer.domElement.clientWidth)*2-1
+mouse.y=-(event.offsetY/renderer.domElement.clientHeight)*2+1
 
 raycaster.setFromCamera(mouse,camera)
 
-let intersects = raycaster.intersectObjects(scene.children)
+let intersects=raycaster.intersectObjects(pieces)
 
-if(intersects.length > 0){
+if(intersects.length>0){
 
-selectedPiece = intersects[0].object
+selected=intersects[0].object
 
 }
 
@@ -192,13 +158,13 @@ selectedPiece = intersects[0].object
 
 
 
-/* CHANGER COULEUR */
+/* COULEUR */
 
-document.getElementById("colorCorps").addEventListener("input",(e)=>{
+document.getElementById("colorPicker").addEventListener("input",(e)=>{
 
-if(selectedPiece){
+if(selected){
 
-selectedPiece.material.color.set(e.target.value)
+selected.material.color.set(e.target.value)
 
 }
 
@@ -210,11 +176,11 @@ selectedPiece.material.color.set(e.target.value)
 
 function exportImage(){
 
-let link = document.createElement("a")
+let link=document.createElement("a")
 
-link.download = "piece_config.png"
+link.download="config_piece.png"
 
-link.href = renderer.domElement.toDataURL()
+link.href=renderer.domElement.toDataURL()
 
 link.click()
 
@@ -222,7 +188,7 @@ link.click()
 
 
 
-/* ANIMATION */
+/* RENDER */
 
 function animate(){
 
