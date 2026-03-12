@@ -1,6 +1,6 @@
 let scene = new THREE.Scene()
 
-scene.background = new THREE.Color(0xe5e5e5)
+scene.background = new THREE.Color(0xf2f2f2)
 
 
 
@@ -11,13 +11,13 @@ window.innerWidth/window.innerHeight,
 1000
 )
 
-camera.position.set(0,40,120)
+camera.position.set(0,50,140)
 
 
 
 let renderer = new THREE.WebGLRenderer({antialias:true})
 
-renderer.setSize(window.innerWidth*0.75,window.innerHeight*0.8)
+renderer.setSize(window.innerWidth*0.7,window.innerHeight*0.8)
 
 renderer.shadowMap.enabled = true
 
@@ -25,34 +25,39 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 
 
-/* LUMIERE STUDIO */
+/* LUMIERES */
 
-let light1 = new THREE.DirectionalLight(0xffffff,1)
+let keyLight = new THREE.DirectionalLight(0xffffff,1)
 
-light1.position.set(200,200,200)
+keyLight.position.set(200,200,200)
 
-light1.castShadow = true
+keyLight.castShadow = true
 
-scene.add(light1)
+scene.add(keyLight)
 
+let fillLight = new THREE.DirectionalLight(0xffffff,0.5)
 
+fillLight.position.set(-200,100,100)
 
-let light2 = new THREE.AmbientLight(0xffffff,0.5)
+scene.add(fillLight)
 
-scene.add(light2)
+let ambient = new THREE.AmbientLight(0xffffff,0.4)
+
+scene.add(ambient)
 
 
 
 /* SOL */
 
-let planeGeometry = new THREE.PlaneGeometry(500,500)
+let planeGeometry = new THREE.PlaneGeometry(600,600)
 
 let planeMaterial = new THREE.ShadowMaterial({opacity:0.25})
 
 let plane = new THREE.Mesh(planeGeometry,planeMaterial)
 
 plane.rotation.x = -Math.PI/2
-plane.position.y = -10
+
+plane.position.y = -12
 
 plane.receiveShadow = true
 
@@ -66,15 +71,15 @@ let loader = new THREE.STLLoader()
 
 let pieces = []
 
-function chargerPiece(fichier,couleur){
+function chargerPiece(nom,couleur){
 
-loader.load("models/"+fichier,function(geometry){
+loader.load("models/"+nom,function(geometry){
 
 let material = new THREE.MeshStandardMaterial({
 
 color:couleur,
 roughness:0.35,
-metalness:0.1
+metalness:0.05
 
 })
 
@@ -98,12 +103,13 @@ chargerPiece("piece_logo.STL",0x000000)
 
 
 
-/* ROTATION */
+/* ROTATION SOURIS */
 
 let isDragging=false
 let prev={x:0,y:0}
 
 renderer.domElement.addEventListener("mousedown",()=>isDragging=true)
+
 renderer.domElement.addEventListener("mouseup",()=>isDragging=false)
 
 renderer.domElement.addEventListener("mousemove",(e)=>{
@@ -135,9 +141,10 @@ camera.position.z+=e.deltaY*0.05
 /* SELECTION PIECE */
 
 let raycaster=new THREE.Raycaster()
+
 let mouse=new THREE.Vector2()
 
-let selected=null
+let selectedPiece=null
 
 renderer.domElement.addEventListener("click",(event)=>{
 
@@ -150,7 +157,7 @@ let intersects=raycaster.intersectObjects(pieces)
 
 if(intersects.length>0){
 
-selected=intersects[0].object
+selectedPiece=intersects[0].object
 
 }
 
@@ -158,13 +165,13 @@ selected=intersects[0].object
 
 
 
-/* COULEUR */
+/* CHANGEMENT COULEUR */
 
 document.getElementById("colorPicker").addEventListener("input",(e)=>{
 
-if(selected){
+if(selectedPiece){
 
-selected.material.color.set(e.target.value)
+selectedPiece.material.color.set(e.target.value)
 
 }
 
@@ -178,7 +185,7 @@ function exportImage(){
 
 let link=document.createElement("a")
 
-link.download="config_piece.png"
+link.download="configurateur_piece.png"
 
 link.href=renderer.domElement.toDataURL()
 
