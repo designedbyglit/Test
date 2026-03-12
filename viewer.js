@@ -16,7 +16,6 @@ camera.position.set(0,40,120)
 
 
 let renderer = new THREE.WebGLRenderer({antialias:true})
-
 renderer.setSize(600,400)
 
 renderer.shadowMap.enabled = true
@@ -25,17 +24,14 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 
 
-/* LUMIERES STUDIO */
+/* LUMIERES */
 
 let light1 = new THREE.DirectionalLight(0xffffff,1)
 
 light1.position.set(100,200,100)
-
 light1.castShadow = true
 
 scene.add(light1)
-
-
 
 let light2 = new THREE.AmbientLight(0xffffff,0.6)
 
@@ -43,7 +39,7 @@ scene.add(light2)
 
 
 
-/* SOL POUR OMBRE */
+/* SOL */
 
 let planeGeometry = new THREE.PlaneGeometry(500,500)
 
@@ -52,7 +48,6 @@ let planeMaterial = new THREE.ShadowMaterial({opacity:0.2})
 let plane = new THREE.Mesh(planeGeometry,planeMaterial)
 
 plane.rotation.x = -Math.PI/2
-
 plane.position.y = -10
 
 plane.receiveShadow = true
@@ -76,18 +71,13 @@ let logo
 loader.load("models/piece_corps.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
-
 color:0x7a00ff,
-roughness:0.35,
-metalness:0.1
-
+roughness:0.35
 })
 
 corps = new THREE.Mesh(geometry,material)
 
 corps.rotation.x = -Math.PI/2
-
-corps.castShadow = true
 
 scene.add(corps)
 
@@ -100,17 +90,12 @@ scene.add(corps)
 loader.load("models/piece_contour.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
-
-color:0xffffff,
-roughness:0.35
-
+color:0xffffff
 })
 
 contour = new THREE.Mesh(geometry,material)
 
 contour.rotation.x = -Math.PI/2
-
-contour.castShadow = true
 
 scene.add(contour)
 
@@ -123,17 +108,12 @@ scene.add(contour)
 loader.load("models/piece_logo.STL", function (geometry){
 
 let material = new THREE.MeshStandardMaterial({
-
-color:0x000000,
-roughness:0.35
-
+color:0x000000
 })
 
 logo = new THREE.Mesh(geometry,material)
 
 logo.rotation.x = -Math.PI/2
-
-logo.castShadow = true
 
 scene.add(logo)
 
@@ -174,7 +154,7 @@ prev = {x:e.offsetX,y:e.offsetY}
 
 
 
-/* ZOOM MOLETTE */
+/* ZOOM */
 
 renderer.domElement.addEventListener("wheel",(e)=>{
 
@@ -184,23 +164,43 @@ camera.position.z += e.deltaY * 0.05
 
 
 
-/* COULEURS */
+/* SELECTION PIECE */
+
+let raycaster = new THREE.Raycaster()
+let mouse = new THREE.Vector2()
+
+let selectedPiece = null
+
+
+
+renderer.domElement.addEventListener("click",(event)=>{
+
+mouse.x = (event.offsetX / 600) * 2 - 1
+mouse.y = -(event.offsetY / 400) * 2 + 1
+
+raycaster.setFromCamera(mouse,camera)
+
+let intersects = raycaster.intersectObjects(scene.children)
+
+if(intersects.length > 0){
+
+selectedPiece = intersects[0].object
+
+}
+
+})
+
+
+
+/* CHANGER COULEUR */
 
 document.getElementById("colorCorps").addEventListener("input",(e)=>{
 
-if(corps) corps.material.color.set(e.target.value)
+if(selectedPiece){
 
-})
+selectedPiece.material.color.set(e.target.value)
 
-document.getElementById("colorContour").addEventListener("input",(e)=>{
-
-if(contour) contour.material.color.set(e.target.value)
-
-})
-
-document.getElementById("colorLogo").addEventListener("input",(e)=>{
-
-if(logo) logo.material.color.set(e.target.value)
+}
 
 })
 
