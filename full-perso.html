@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Full Perso</title>
 
@@ -16,57 +15,36 @@
 
 <header>
 
-<div class="menu-gauche">
-<a href="index.html">Accueil</a>
-<a href="#">Produits</a>
-<a href="#">Panier</a>
-</div>
-
-<div class="logo">
-<a href="index.html">
-<img src="logo.png">
-</a>
-</div>
-
-<div class="menu-droite">
-<a href="#">S'inscrire / Connexion</a>
-</div>
+<a href="index.html">Retour accueil</a>
 
 </header>
 
+<div style="padding:120px;max-width:600px;margin:auto;">
 
-<section class="formulaire">
+<h2>Demande Full Personnalisation</h2>
 
-<h1>Commande Full Perso</h1>
+<form action="https://formspree.io/f/TONID" method="POST">
 
-<form action="https://formspree.io/f/TONCODE" method="POST">
+<input type="text" name="marque" placeholder="Marque"><br><br>
 
-<label>Nom</label>
-<input type="text" name="nom">
+<input type="text" name="numero" placeholder="Numéro"><br><br>
 
-<label>Email</label>
-<input type="email" name="email">
+<input type="text" name="instagram" placeholder="Instagram"><br><br>
 
-<label>Marques</label>
-<input type="text" name="marques">
+<input type="text" name="pseudo" placeholder="Pseudo"><br><br>
 
-<label>Numéro</label>
-<input type="text" name="numero">
+<textarea name="message" placeholder="Explique ton projet"></textarea><br><br>
 
-<label>Instagram</label>
-<input type="text" name="instagram">
+<button type="submit">
 
-<label>Pseudo</label>
-<input type="text" name="pseudo">
+Envoyer
 
-<label>Description</label>
-<textarea name="message"></textarea>
-
-<button type="submit">Envoyer</button>
+</button>
 
 </form>
 
-</section>
+</div>
 
 </body>
+
 </html>
