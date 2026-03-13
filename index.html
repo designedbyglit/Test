@@ -18,27 +18,19 @@
 <header>
 
 <div class="menu-left">
-
-<a href="#">Accueil</a>
-<a href="#">Produits</a>
-<a href="#">Panier</a>
-
+<a href="index.html">Accueil</a>
+<a href="#products">Produits</a>
+<a href="panier.html">Panier</a>
 </div>
 
-
 <div class="logo">
-
 <a href="index.html">
 <img src="logo.png">
 </a>
-
 </div>
 
-
 <div class="menu-right">
-
-<button class="login-btn">Connexion</button>
-
+<button onclick="openPanier()">🛒 Panier</button>
 </div>
 
 </header>
@@ -48,21 +40,14 @@
 
 <div class="hero-container">
 
-<a href="semi-perso.html" class="hero-card">
-
+<a href="configurateur.html" class="hero-card">
 <img src="images/semi.jpg">
-
 <div class="hero-text">Semi‑Perso</div>
-
 </a>
 
-
-<a href="full-perso.html" class="hero-card">
-
+<a href="configurateur.html" class="hero-card">
 <img src="images/full.jpg">
-
 <div class="hero-text">Full‑Perso</div>
-
 </a>
 
 </div>
@@ -71,7 +56,7 @@
 
 
 
-<section class="products">
+<section id="products" class="products">
 
 <h2>Nos Produits</h2>
 
@@ -82,11 +67,11 @@
 
 <img src="images/p1.jpg">
 
-<h3>Cache allumage</h3>
+<h3>Cache Allumage</h3>
 
-<p>49€</p>
+<p>30€</p>
 
-<button>Ajouter au panier</button>
+<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
 
 </div>
 
@@ -96,11 +81,11 @@
 
 <img src="images/p2.jpg">
 
-<h3>Cache pignon</h3>
+<h3>Cache Pignon</h3>
 
-<p>39€</p>
+<p>15€</p>
 
-<button>Ajouter au panier</button>
+<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
 
 </div>
 
@@ -110,11 +95,11 @@
 
 <img src="images/p3.jpg">
 
-<h3>Cache maitre cylindre</h3>
+<h3>Support Durite</h3>
 
-<p>29€</p>
+<p>6€</p>
 
-<button>Ajouter au panier</button>
+<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
 
 </div>
 
@@ -124,11 +109,67 @@
 
 <img src="images/p4.jpg">
 
-<h3>Support durite</h3>
+<h3>Butée de Biellette</h3>
 
-<p>19€</p>
+<p>10€</p>
 
-<button>Ajouter au panier</button>
+<button onclick="addToCart('Butée Biellette',10)">Ajouter au panier</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/p5.jpg">
+
+<h3>Cache Obturateur</h3>
+
+<p>12€</p>
+
+<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/p6.jpg">
+
+<h3>Récupérateur Fluides</h3>
+
+<p>16€</p>
+
+<button onclick="addToCart('Recuperateur',16)">Ajouter au panier</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/p7.jpg">
+
+<h3>Pipe Performance</h3>
+
+<p>20€</p>
+
+<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/p8.jpg">
+
+<h3>Adaptation Radia Derbi</h3>
+
+<p>25€</p>
+
+<button onclick="addToCart('Adaptation Radia',25)">Ajouter au panier</button>
 
 </div>
 
@@ -138,10 +179,8 @@
 </section>
 
 
-<script src="script.js"></script>
-
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
+<script src="main.js"></script>
 
 </body>
+
 </html>
