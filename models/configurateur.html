@@ -43,7 +43,7 @@ window.innerWidth/window.innerHeight,
 1000
 )
 
-const renderer = new THREE.WebGLRenderer()
+const renderer = new THREE.WebGLRenderer({antialias:true})
 
 renderer.setSize(window.innerWidth,600)
 
@@ -55,11 +55,41 @@ light.position.set(0,1,1)
 
 scene.add(light)
 
+const light2 = new THREE.AmbientLight(0xffffff,0.6)
+
+scene.add(light2)
+
 const loader = new THREE.STLLoader()
 
-loader.load('stl/piece_corps.STL', function (geometry) {
+/* PIECE CORPS */
+
+loader.load('models/piece_corps.STL', function (geometry) {
 
 const material = new THREE.MeshPhongMaterial({color:0xff0000})
+
+const mesh = new THREE.Mesh(geometry,material)
+
+scene.add(mesh)
+
+})
+
+/* PIECE LOGO */
+
+loader.load('models/piece_logo.STL', function (geometry) {
+
+const material = new THREE.MeshPhongMaterial({color:0x000000})
+
+const mesh = new THREE.Mesh(geometry,material)
+
+scene.add(mesh)
+
+})
+
+/* PIECE CONTOUR */
+
+loader.load('models/piece_contour.STL', function (geometry) {
+
+const material = new THREE.MeshPhongMaterial({color:0xffffff})
 
 const mesh = new THREE.Mesh(geometry,material)
 
