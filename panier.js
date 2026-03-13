@@ -1,29 +1,14 @@
+function addToCart(name,price){
 
-let cart = JSON.parse(localStorage.getItem("cart")) || []
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let container = document.getElementById("cart")
+cart.push({
+name:name,
+price:price
+});
 
-let total = 0
+localStorage.setItem("cart",JSON.stringify(cart));
 
-cart.forEach(item =>{
-
-let div = document.createElement("div")
-
-div.innerHTML = item.name + " - " + item.price + "€"
-
-container.appendChild(div)
-
-total += item.price
-
-})
-
-document.getElementById("total").innerHTML = "Total : " + total + "€"
-
-
-function clearCart(){
-
-localStorage.removeItem("cart")
-
-location.reload()
+alert("Produit ajouté au panier");
 
 }
