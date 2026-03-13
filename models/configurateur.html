@@ -8,44 +8,8 @@
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/STLLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
-
-<style>
-
-.config-container{
-
-padding-top:120px;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-
-}
-
-#viewer{
-
-width:800px;
-height:500px;
-
-background:white;
-
-border-radius:10px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-
-}
-
-.controls{
-
-margin-top:20px;
-display:flex;
-gap:20px;
-
-}
-
-</style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/loaders/STLLoader.js"></script>
 
 </head>
 
@@ -55,7 +19,6 @@ gap:20px;
 
 <div class="nav-left">
 <a href="index.html">Accueil</a>
-<a href="index.html#produits">Produits</a>
 <a href="panier.html">Panier</a>
 </div>
 
@@ -65,155 +28,58 @@ gap:20px;
 </a>
 </div>
 
-<div class="nav-right">
-<a href="#">Connexion</a>
-</div>
-
 </header>
 
-
-<div class="config-container">
-
-<h1>Configurateur Cache Allumage</h1>
-
-<div id="viewer"></div>
-
-<div class="controls">
-
-<label>Couleur Corps</label>
-<input type="color" id="corpsColor" value="#000000">
-
-<label>Couleur Logo</label>
-<input type="color" id="logoColor" value="#ff0000">
-
-<label>Couleur Contour</label>
-<input type="color" id="contourColor" value="#ffffff">
-
-</div>
-
-<br>
-
-<button onclick="addToCart('Cache Allumage personnalisé',30)">
-Ajouter au panier (30€)
-</button>
-
-</div>
-
-
-<script src="panier.js"></script>
+<div id="viewer" style="width:100%;height:600px;"></div>
 
 <script>
 
-const scene = new THREE.Scene();
+const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(
 75,
-800/500,
+window.innerWidth/window.innerHeight,
 0.1,
 1000
-);
+)
 
-const renderer = new THREE.WebGLRenderer({antialias:true});
+const renderer = new THREE.WebGLRenderer()
 
-renderer.setSize(800,500);
+renderer.setSize(window.innerWidth,600)
 
-document.getElementById("viewer").appendChild(renderer.domElement);
+document.getElementById("viewer").appendChild(renderer.domElement)
 
-const light = new THREE.DirectionalLight(0xffffff,1);
-light.position.set(0,0,10);
-scene.add(light);
+const light = new THREE.DirectionalLight(0xffffff,1)
 
-const ambient = new THREE.AmbientLight(0xffffff,0.5);
-scene.add(ambient);
+light.position.set(0,1,1)
 
-camera.position.z = 100;
+scene.add(light)
 
-const controls = new THREE.OrbitControls(camera,renderer.domElement);
+const loader = new THREE.STLLoader()
 
-const loader = new THREE.STLLoader();
+loader.load('stl/piece_corps.STL', function (geometry) {
 
-let corpsMesh;
-let logoMesh;
-let contourMesh;
+const material = new THREE.MeshPhongMaterial({color:0xff0000})
 
-loader.load("piece_corps.STL",function(geometry){
+const mesh = new THREE.Mesh(geometry,material)
 
-const material = new THREE.MeshStandardMaterial({color:0x000000});
+scene.add(mesh)
 
-corpsMesh = new THREE.Mesh(geometry,material);
+})
 
-scene.add(corpsMesh);
-
-});
-
-
-loader.load("piece_logo.STL",function(geometry){
-
-const material = new THREE.MeshStandardMaterial({color:0xff0000});
-
-logoMesh = new THREE.Mesh(geometry,material);
-
-scene.add(logoMesh);
-
-});
-
-
-loader.load("piece_contour.STL",function(geometry){
-
-const material = new THREE.MeshStandardMaterial({color:0xffffff});
-
-contourMesh = new THREE.Mesh(geometry,material);
-
-scene.add(contourMesh);
-
-});
-
-
-
-document.getElementById("corpsColor").addEventListener("input",function(){
-
-if(corpsMesh){
-
-corpsMesh.material.color.set(this.value);
-
-}
-
-});
-
-
-document.getElementById("logoColor").addEventListener("input",function(){
-
-if(logoMesh){
-
-logoMesh.material.color.set(this.value);
-
-}
-
-});
-
-
-document.getElementById("contourColor").addEventListener("input",function(){
-
-if(contourMesh){
-
-contourMesh.material.color.set(this.value);
-
-}
-
-});
-
+camera.position.z = 120
 
 function animate(){
 
-requestAnimationFrame(animate);
+requestAnimationFrame(animate)
 
-controls.update();
+scene.rotation.y += 0.01
 
-renderer.render(scene,camera);
+renderer.render(scene,camera)
 
 }
 
-animate();
+animate()
 
 </script>
 
