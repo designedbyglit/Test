@@ -9,6 +9,6 @@ price:price
 
 localStorage.setItem("cart",JSON.stringify(cart));
 
-alert("Produit ajouté au panier");
+alert("Produit ajouté au panier 🛒");
 
 }
