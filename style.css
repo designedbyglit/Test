@@ -1,51 +1,76 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
 
-margin:0;
-font-family:'Poppins',sans-serif;
-
-background:
-linear-gradient(180deg,#eef4ff,#ffffff);
+background:linear-gradient(180deg,#eef4ff,#ffffff);
+color:#111;
 
 }
 
-
+/* HEADER */
 
 header{
 
 position:fixed;
 top:0;
+left:0;
 width:100%;
-height:80px;
 
 display:flex;
 align-items:center;
 justify-content:space-between;
 
-padding:0 40px;
+padding:15px 40px;
 
-background:rgba(255,255,255,0.6);
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(12px);
 
-backdrop-filter:blur(10px);
+z-index:1000;
 
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-
-z-index:100;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
 
 }
 
+/* NAV */
 
+.nav-left a{
 
-.nav-left a,
+margin-right:20px;
+text-decoration:none;
+color:#000;
+font-weight:600;
+
+}
+
 .nav-right a{
 
-margin:0 15px;
 text-decoration:none;
 color:black;
-font-weight:500;
+font-weight:bold;
+
+padding:8px 16px;
+
+border-radius:6px;
+
+background:#f2f2f2;
+
+transition:0.2s;
 
 }
 
+.nav-right a:hover{
 
+background:black;
+color:white;
+
+}
+
+/* LOGO */
 
 .logo{
 
@@ -57,48 +82,44 @@ transform:translateX(-50%);
 
 .logo img{
 
-height:45px;
+height:50px;
+cursor:pointer;
 
 }
 
-
+/* HERO */
 
 .hero{
 
-margin-top:80px;
+margin-top:100px;
 
-display:flex;
+display:grid;
 
-height:420px;
+grid-template-columns:1fr 1fr;
+
+height:400px;
 
 }
 
-
-
 .hero-card{
-
-flex:1;
 
 position:relative;
 
 overflow:hidden;
 
+cursor:pointer;
+
 }
-
-
 
 .hero-card img{
 
 width:100%;
 height:100%;
-
 object-fit:cover;
 
-transition:0.5s;
+transition:0.4s;
 
 }
-
-
 
 .hero-card:hover img{
 
@@ -106,127 +127,149 @@ transform:scale(1.1);
 
 }
 
-
-
 .hero-text{
 
 position:absolute;
 
-bottom:30px;
-left:30px;
-
-font-size:40px;
+bottom:40px;
+left:40px;
 
 color:white;
 
-font-weight:700;
+font-size:30px;
+font-weight:bold;
 
-text-shadow:0 0 10px rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.5);
 
-}
+padding:10px 20px;
 
-
-
-#produits{
-
-padding:100px 80px;
+border-radius:8px;
 
 }
 
+/* PRODUITS */
 
+.produits{
 
-#produits h2{
+padding:80px 60px;
+
+}
+
+.produits h2{
 
 text-align:center;
-
-font-size:40px;
-
-margin-bottom:60px;
+margin-bottom:50px;
+font-size:32px;
 
 }
 
+/* GRID */
 
-
-.produits-grid{
+.grid{
 
 display:grid;
 
 grid-template-columns:repeat(4,1fr);
 
-gap:40px;
+gap:30px;
 
 }
 
+/* CARTE PRODUIT */
 
+.card{
 
-.produit{
-
-background:rgba(255,255,255,0.7);
-
-backdrop-filter:blur(10px);
+background:white;
 
 border-radius:12px;
 
-padding:20px;
+overflow:hidden;
 
-text-align:center;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-
-transition:0.4s;
-
-}
-
-
-
-.produit:hover{
-
-transform:translateY(-8px) scale(1.03);
-
-}
-
-
-
-.produit img{
-
-width:100%;
-
-height:200px;
-
-object-fit:cover;
-
-border-radius:10px;
-
-margin-bottom:15px;
-
-}
-
-
-
-button{
-
-background:black;
-
-color:white;
-
-border:none;
-
-padding:12px 20px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-font-weight:500;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 
 transition:0.3s;
 
 }
 
+.card:hover{
 
+transform:translateY(-8px);
+
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+
+}
+
+.card img{
+
+width:100%;
+height:200px;
+object-fit:cover;
+
+}
+
+.card-content{
+
+padding:20px;
+
+}
+
+.card-content h3{
+
+margin-bottom:10px;
+
+}
+
+.price{
+
+font-weight:bold;
+margin-bottom:15px;
+
+}
+
+button{
+
+width:100%;
+
+background:black;
+color:white;
+
+border:none;
+
+padding:12px;
+
+border-radius:8px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
 
 button:hover{
 
 background:#333;
+
+}
+
+/* NUAGES DECOR */
+
+body::before{
+
+content:"";
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:url("https://www.transparenttextures.com/patterns/clouds.png");
+
+opacity:0.15;
+
+pointer-events:none;
 
 }
