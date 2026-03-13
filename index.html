@@ -4,16 +4,113 @@
 <head>
 
 <meta charset="UTF-8">
-<title>3D Moto Parts</title>
+<title>Site Pièces Moto</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* HERO MOTO */
+
+.hero-moto{
+
+margin-top:90px;
+
+height:70vh;
+
+background:url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1500&q=80");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:white;
+
+text-align:center;
+
+}
+
+.hero-moto h1{
+
+font-size:60px;
+
+background:rgba(0,0,0,0.5);
+
+padding:20px 40px;
+
+border-radius:10px;
+
+}
+
+/* BOUTONS CHOIX */
+
+.choix{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+margin-top:40px;
+
+}
+
+.choix-card{
+
+position:relative;
+
+height:300px;
+
+overflow:hidden;
+
+cursor:pointer;
+
+}
+
+.choix-card img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+transition:0.4s;
+
+}
+
+.choix-card:hover img{
+
+transform:scale(1.1);
+
+}
+
+.choix-text{
+
+position:absolute;
+
+bottom:30px;
+left:30px;
+
+font-size:30px;
+font-weight:bold;
+
+background:rgba(0,0,0,0.6);
+
+color:white;
+
+padding:10px 20px;
+
+border-radius:8px;
+
+}
+
+</style>
 
 </head>
 
 <body>
-
 
 <header>
 
@@ -30,32 +127,50 @@
 </div>
 
 <div class="nav-right">
-<a href="#">Connexion</a>
+<a href="#">Connexion / Inscription</a>
 </div>
 
 </header>
 
 
+<section class="hero-moto">
 
-<section class="hero">
+<h1>Pièces Moto 3D Personnalisées</h1>
 
-<a href="configurateur.html" class="hero-card">
+</section>
+
+
+<section class="choix">
+
+<a href="configurateur.html">
+
+<div class="choix-card">
 
 <img src="images/semi.jpg">
 
-<div class="hero-text">
-Semi‑Perso
+<div class="choix-text">
+
+Semi-Perso
+
+</div>
+
 </div>
 
 </a>
 
 
-<a href="fullperso.html" class="hero-card">
+<a href="fullperso.html">
+
+<div class="choix-card">
 
 <img src="images/full.jpg">
 
-<div class="hero-text">
-Full‑Perso
+<div class="choix-text">
+
+Full-Perso
+
+</div>
+
 </div>
 
 </a>
@@ -64,81 +179,188 @@ Full‑Perso
 
 
 
-<section id="produits">
+<section class="produits" id="produits">
 
 <h2>Nos Produits</h2>
 
-<div class="produits-grid">
+<div class="grid">
 
+<div class="card">
 
-<div class="produit">
 <img src="images/p1.jpg">
+
+<div class="card-content">
+
 <h3>Cache Allumage</h3>
-<p>30€</p>
-<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
+
+<div class="price">30€</div>
+
+<button onclick="addToCart('Cache Allumage',30)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+<div class="card">
+
 <img src="images/p2.jpg">
+
+<div class="card-content">
+
 <h3>Cache Pignon</h3>
-<p>15€</p>
-<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
+
+<div class="price">15€</div>
+
+<button onclick="addToCart('Cache Pignon',15)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p3.jpg">
+
+<div class="card-content">
+
 <h3>Support Durite</h3>
-<p>6€</p>
-<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
+
+<div class="price">6€</div>
+
+<button onclick="addToCart('Support Durite',6)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p4.jpg">
+
+<div class="card-content">
+
 <h3>Butée de Bielette</h3>
-<p>10€</p>
-<button onclick="addToCart('Butée Bielette',10)">Ajouter au panier</button>
+
+<div class="price">10€</div>
+
+<button onclick="addToCart('Butée de Bielette',10)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p5.jpg">
+
+<div class="card-content">
+
 <h3>Cache Obturateur</h3>
-<p>12€</p>
-<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
+
+<div class="price">12€</div>
+
+<button onclick="addToCart('Cache Obturateur',12)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p6.jpg">
+
+<div class="card-content">
+
 <h3>Récupérateur de fluides</h3>
-<p>16€</p>
-<button onclick="addToCart('Récupérateur Fluides',16)">Ajouter au panier</button>
+
+<div class="price">16€</div>
+
+<button onclick="addToCart('Récupérateur',16)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p7.jpg">
+
+<div class="card-content">
+
 <h3>Pipe Performance</h3>
-<p>20€</p>
-<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
+
+<div class="price">20€</div>
+
+<button onclick="addToCart('Pipe Performance',20)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
 </div>
 
 
-<div class="produit">
+
+<div class="card">
+
 <img src="images/p8.jpg">
+
+<div class="card-content">
+
 <h3>Adaptation Radia Derbi</h3>
-<p>25€</p>
-<button onclick="addToCart('Adaptation Radia',25)">Ajouter au panier</button>
+
+<div class="price">25€</div>
+
+<button onclick="addToCart('Adaptation Radia Derbi',25)">
+
+Ajouter au panier
+
+</button>
+
 </div>
 
+</div>
 
 </div>
 
 </section>
-
 
 <script src="panier.js"></script>
 
