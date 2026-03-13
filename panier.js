@@ -1,88 +1,59 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-function addToCart(name, price) {
+function addToCart(name, price){
 
-cart.push({
-name:name,
-price:price
-});
+cart.push({name,price})
 
-localStorage.setItem("cart", JSON.stringify(cart));
+localStorage.setItem("cart",JSON.stringify(cart))
 
-updateCartCount();
+updateCartCount()
 
-alert(name + " ajouté au panier");
+alert("Produit ajouté au panier")
 
 }
 
 function updateCartCount(){
 
-let count = cart.length;
+const count = cart.length
 
-let el = document.getElementById("cart-count");
+const el = document.getElementById("cart-count")
 
 if(el){
-el.innerText = count;
+el.innerText = count
 }
 
 }
 
-function displayCart(){
+function loadCart(){
 
-let container = document.getElementById("cart-items");
+const container = document.getElementById("cart-items")
 
-if(!container) return;
+if(!container) return
 
-container.innerHTML="";
+container.innerHTML = ""
 
-let total=0;
+let total = 0
 
-cart.forEach((item,index)=>{
+cart.forEach(item => {
 
-let div=document.createElement("div");
+const div = document.createElement("div")
 
-div.className="cart-item";
+div.className = "cart-item"
 
-div.innerHTML=`
-
+div.innerHTML = `
 <span>${item.name}</span>
+<span>${item.price}€</span>
+`
 
-<span>${item.price} €</span>
+container.appendChild(div)
 
-<button onclick="removeItem(${index})">Supprimer</button>
+total += item.price
 
-`;
+})
 
-container.appendChild(div);
-
-total+=item.price;
-
-});
-
-let totalDiv=document.getElementById("total");
-
-if(totalDiv){
-totalDiv.innerText="Total : "+total+" €";
-}
+document.getElementById("total").innerText = total + "€"
 
 }
 
-function removeItem(index){
-
-cart.splice(index,1);
-
-localStorage.setItem("cart", JSON.stringify(cart));
-
-displayCart();
-
-updateCartCount();
-
-}
-
-window.onload=function(){
-
-updateCartCount();
-
-displayCart();
-
-}
+updateCartCount()
+loadCart()
