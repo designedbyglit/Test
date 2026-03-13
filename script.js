@@ -1,18 +1,14 @@
-
 const products = document.querySelectorAll(".product")
 
 window.addEventListener("scroll",()=>{
 
-products.forEach((p)=>{
+products.forEach((product)=>{
 
-const position = p.getBoundingClientRect().top
-
-const screenPosition = window.innerHeight/1.2
+const position = product.getBoundingClientRect().top
+const screenPosition = window.innerHeight / 1.2
 
 if(position < screenPosition){
-
-p.classList.add("visible")
-
+product.classList.add("visible")
 }
 
 })
