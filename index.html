@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Custom Moto Parts</title>
+<title>3D Moto Parts</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
 <header>
 
-<div class="menu-left">
+<div class="nav-left">
 <a href="index.html">Accueil</a>
-<a href="#products">Produits</a>
+<a href="#produits">Produits</a>
 <a href="panier.html">Panier</a>
 </div>
 
@@ -29,8 +24,8 @@
 </a>
 </div>
 
-<div class="menu-right">
-<button onclick="openPanier()">🛒 Panier</button>
+<div class="nav-right">
+<a href="login.html">Connexion</a>
 </div>
 
 </header>
@@ -38,149 +33,86 @@
 
 <section class="hero">
 
-<div class="hero-container">
-
 <a href="configurateur.html" class="hero-card">
 <img src="images/semi.jpg">
 <div class="hero-text">Semi‑Perso</div>
 </a>
 
-<a href="configurateur.html" class="hero-card">
+<a href="fullperso.html" class="hero-card">
 <img src="images/full.jpg">
 <div class="hero-text">Full‑Perso</div>
 </a>
 
-</div>
-
 </section>
 
 
-
-<section id="products" class="products">
+<section id="produits">
 
 <h2>Nos Produits</h2>
 
-<div class="products-grid">
+<div class="produits-grid">
 
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p1.jpg">
-
 <h3>Cache Allumage</h3>
-
 <p>30€</p>
-
-<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
-
+<button onclick="addToCart('Cache Allumage',30)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p2.jpg">
-
 <h3>Cache Pignon</h3>
-
 <p>15€</p>
-
-<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
-
+<button onclick="addToCart('Cache Pignon',15)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p3.jpg">
-
 <h3>Support Durite</h3>
-
 <p>6€</p>
-
-<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
-
+<button onclick="addToCart('Support Durite',6)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p4.jpg">
-
-<h3>Butée de Biellette</h3>
-
+<h3>Butée Bielette</h3>
 <p>10€</p>
-
-<button onclick="addToCart('Butée Biellette',10)">Ajouter au panier</button>
-
+<button onclick="addToCart('Butée Bielette',10)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p5.jpg">
-
 <h3>Cache Obturateur</h3>
-
 <p>12€</p>
-
-<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
-
+<button onclick="addToCart('Cache Obturateur',12)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p6.jpg">
-
 <h3>Récupérateur Fluides</h3>
-
 <p>16€</p>
-
-<button onclick="addToCart('Recuperateur',16)">Ajouter au panier</button>
-
+<button onclick="addToCart('Récupérateur Fluides',16)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p7.jpg">
-
 <h3>Pipe Performance</h3>
-
 <p>20€</p>
-
-<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
-
+<button onclick="addToCart('Pipe Performance',20)">Ajouter</button>
 </div>
 
-
-
-<div class="product">
-
+<div class="produit">
 <img src="images/p8.jpg">
-
 <h3>Adaptation Radia Derbi</h3>
-
 <p>25€</p>
-
-<button onclick="addToCart('Adaptation Radia',25)">Ajouter au panier</button>
-
+<button onclick="addToCart('Adaptation Radia',25)">Ajouter</button>
 </div>
-
 
 </div>
 
 </section>
 
-
-<script src="main.js"></script>
+<script src="panier.js"></script>
 
 </body>
-
 </html>
