@@ -8,181 +8,6 @@
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#f4f7fb;
-}
-
-/* HEADER */
-
-header{
-position:fixed;
-top:0;
-width:100%;
-height:90px;
-background:white;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 40px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-z-index:1000;
-}
-
-.nav-left a{
-margin-right:20px;
-text-decoration:none;
-color:black;
-font-weight:bold;
-}
-
-.nav-right a{
-text-decoration:none;
-color:black;
-font-weight:bold;
-}
-
-.logo img{
-height:60px;
-}
-
-/* HERO */
-
-.hero-moto{
-
-margin-top:90px;
-
-height:70vh;
-
-background:url("images/moto.jpg");
-
-background-size:cover;
-background-position:center;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-color:white;
-text-align:center;
-
-}
-
-.hero-moto h1{
-
-font-size:55px;
-
-background:rgba(0,0,0,0.5);
-
-padding:20px 40px;
-
-border-radius:10px;
-
-}
-
-/* CHOIX */
-
-.choix{
-display:grid;
-grid-template-columns:1fr 1fr;
-margin-top:40px;
-}
-
-.choix-card{
-position:relative;
-height:320px;
-overflow:hidden;
-cursor:pointer;
-}
-
-.choix-card img{
-width:100%;
-height:100%;
-object-fit:cover;
-transition:0.4s;
-}
-
-.choix-card:hover img{
-transform:scale(1.1);
-}
-
-.choix-text{
-position:absolute;
-bottom:30px;
-left:30px;
-font-size:32px;
-font-weight:bold;
-background:rgba(0,0,0,0.6);
-color:white;
-padding:10px 20px;
-border-radius:8px;
-}
-
-/* PRODUITS */
-
-.produits{
-padding:80px 40px;
-}
-
-.produits h2{
-text-align:center;
-font-size:40px;
-margin-bottom:40px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:30px;
-}
-
-.card{
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.card-content{
-padding:20px;
-text-align:center;
-}
-
-.price{
-font-size:22px;
-margin:10px 0;
-font-weight:bold;
-}
-
-button{
-padding:10px 20px;
-border:none;
-background:black;
-color:white;
-cursor:pointer;
-border-radius:5px;
-}
-
-button:hover{
-background:#444;
-}
-
-</style>
-
 </head>
 
 <body>
@@ -223,9 +48,7 @@ background:#444;
 <img src="images/semi.jpg">
 
 <div class="choix-text">
-
 Semi‑Perso
-
 </div>
 
 </div>
@@ -240,9 +63,7 @@ Semi‑Perso
 <img src="images/full.jpg">
 
 <div class="choix-text">
-
 Full‑Perso
-
 </div>
 
 </div>
@@ -252,7 +73,6 @@ Full‑Perso
 </section>
 
 
-
 <section class="produits" id="produits">
 
 <h2>Nos Produits</h2>
@@ -260,154 +80,82 @@ Full‑Perso
 <div class="grid">
 
 <div class="card">
-
 <img src="images/p1.jpg">
-
 <div class="card-content">
-
 <h3>Cache Allumage</h3>
-
 <div class="price">30€</div>
-
-<button onclick="addToCart('Cache Allumage',30)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p2.jpg">
-
 <div class="card-content">
-
 <h3>Cache Pignon</h3>
-
 <div class="price">15€</div>
-
-<button onclick="addToCart('Cache Pignon',15)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p3.jpg">
-
 <div class="card-content">
-
 <h3>Support Durite</h3>
-
 <div class="price">6€</div>
-
-<button onclick="addToCart('Support Durite',6)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p4.jpg">
-
 <div class="card-content">
-
 <h3>Butée de Bielette</h3>
-
 <div class="price">10€</div>
-
-<button onclick="addToCart('Butée de Bielette',10)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Butée de Bielette',10)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p5.jpg">
-
 <div class="card-content">
-
 <h3>Cache Obturateur</h3>
-
 <div class="price">12€</div>
-
-<button onclick="addToCart('Cache Obturateur',12)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p6.jpg">
-
 <div class="card-content">
-
 <h3>Récupérateur de fluides</h3>
-
 <div class="price">16€</div>
-
-<button onclick="addToCart('Récupérateur',16)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Récupérateur',16)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p7.jpg">
-
 <div class="card-content">
-
 <h3>Pipe Performance</h3>
-
 <div class="price">20€</div>
-
-<button onclick="addToCart('Pipe Performance',20)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <img src="images/p8.jpg">
-
 <div class="card-content">
-
 <h3>Adaptation Radia Derbi</h3>
-
 <div class="price">25€</div>
-
-<button onclick="addToCart('Adaptation Radia Derbi',25)">
-Ajouter au panier
-</button>
-
+<button onclick="addToCart('Adaptation Radia Derbi',25)">Ajouter au panier</button>
 </div>
-
 </div>
 
 </div>
@@ -417,5 +165,4 @@ Ajouter au panier
 <script src="panier.js"></script>
 
 </body>
-
 </html>
