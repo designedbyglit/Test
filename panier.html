@@ -1,47 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
 
 <meta charset="UTF-8">
-
 <title>Panier</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+.panier-container{
+
+padding-top:120px;
+max-width:900px;
+margin:auto;
+
+}
+
+.panier-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+
+padding:20px;
+margin-bottom:15px;
+
+border-radius:10px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+}
+
+.total{
+
+font-size:22px;
+font-weight:bold;
+margin-top:30px;
+
+}
+
+button{
+
+background:black;
+color:white;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<h1 style="margin-top:120px;text-align:center">Votre Panier</h1>
+<header>
 
-<div id="cart"></div>
+<div class="nav-left">
+<a href="index.html">Accueil</a>
+<a href="index.html#produits">Produits</a>
+<a href="panier.html">Panier</a>
+</div>
+
+<div class="logo">
+<a href="index.html">
+<img src="logo.png">
+</a>
+</div>
+
+<div class="nav-right">
+<a href="#">Connexion</a>
+</div>
+
+</header>
+
+<div class="panier-container">
+
+<h1>Votre Panier 🛒</h1>
+
+<div id="cart-items"></div>
+
+<div class="total" id="total"></div>
+
+<br>
+
+<button onclick="viderPanier()">Vider le panier</button>
+
+</div>
+
 
 <script>
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let container = document.getElementById("cart");
+let container = document.getElementById("cart-items");
 
 let total = 0;
 
-cart.forEach(p => {
+cart.forEach((item,index)=>{
 
 let div = document.createElement("div");
 
-div.innerHTML = p.name + " - " + p.price + "€";
+div.className = "panier-item";
+
+div.innerHTML = `
+<span>${item.name}</span>
+<span>${item.price} €</span>
+<button onclick="supprimer(${index})">Supprimer</button>
+`;
 
 container.appendChild(div);
 
-total += p.price;
+total += item.price;
 
 });
 
-let totalDiv = document.createElement("h2");
+document.getElementById("total").innerText = "Total : " + total + " €";
 
-totalDiv.innerHTML = "Total : " + total + "€";
 
-container.appendChild(totalDiv);
+function supprimer(index){
+
+cart.splice(index,1);
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+location.reload();
+
+}
+
+
+function viderPanier(){
+
+localStorage.removeItem("cart");
+
+location.reload();
+
+}
 
 </script>
 
