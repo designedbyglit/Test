@@ -31,21 +31,19 @@ padding:20px;
 text-align:center;
 }
 
-button{
-
-background:#a100ff;
-border:none;
-padding:10px 15px;
-margin:5px;
-color:white;
-border-radius:10px;
-cursor:pointer;
-
-}
-
 select{
 padding:8px;
-margin:10px;
+margin:5px;
+}
+
+button{
+background:#a100ff;
+border:none;
+padding:8px 12px;
+margin:4px;
+color:white;
+border-radius:8px;
+cursor:pointer;
 }
 
 </style>
@@ -54,13 +52,9 @@ margin:10px;
 <body>
 
 <header>
-
 <a href="index.html">Accueil</a>
-
 <div>Configurateur</div>
-
 <a href="panier.html">Panier</a>
-
 </header>
 
 <div id="viewer"></div>
@@ -76,6 +70,12 @@ margin:10px;
 
 <br><br>
 
+<label>Pièce à colorer :</label>
+
+<select id="pieceSelect"></select>
+
+<br><br>
+
 <button onclick="setColor('#000000')">Noir</button>
 <button onclick="setColor('#ffffff')">Blanc</button>
 <button onclick="setColor('#ff0000')">Rouge</button>
@@ -83,15 +83,13 @@ margin:10px;
 <button onclick="setColor('#a100ff')">Violet</button>
 <button onclick="setColor('#ff7b00')">Orange</button>
 
-<br><br>
-
-<button onclick="addToCart()">Ajouter au panier</button>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 
 <script src="js/viewer.js"></script>
 
