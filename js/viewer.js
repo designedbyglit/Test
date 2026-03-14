@@ -90,14 +90,13 @@ let moteur=document.getElementById("moteur").value
 
 if(piece=="cache_allumage"){
 
-if(moteur=="e3"){
+addPiece("base","models/base - Cache allumageEEEEeeee-1.stl")
 
-addPiece("base","models/cache_e3_base.stl")
-addPiece("rond","models/cache_e3_rond.stl")
-addPiece("piece1","models/cache_e3_pieces1.stl")
-addPiece("piece2","models/cache_e3_pieces2.stl")
+addPiece("piece1","models/base - Pièce6^Assemblage2-1.stl")
 
-}
+addPiece("rond","models/base - Rond Nolan-1.stl")
+
+addPiece("piece2","models/base - zz-1.stl")
 
 }
 
