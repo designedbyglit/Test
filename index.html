@@ -13,7 +13,6 @@ margin:0;
 background:#0a0a0a;
 color:white;
 font-family:Arial;
-overflow-x:hidden;
 }
 
 /* HEADER */
@@ -42,22 +41,61 @@ font-weight:bold;
 
 .hero{
 text-align:center;
-margin-top:40px;
 font-size:32px;
+margin-top:40px;
+}
+
+/* SEMI FULL */
+
+.top-products{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+padding:60px;
+
+}
+
+.big-card{
+
+background:#111;
+border-radius:25px;
+overflow:hidden;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+animation:float 4s ease-in-out infinite;
+
+}
+
+.big-card img{
+width:100%;
+height:320px;
+object-fit:cover;
+}
+
+.big-card h2{
+padding:20px;
+}
+
+.big-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px #a100ff;
 }
 
 /* PRODUITS */
 
 .products{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:40px;
-padding:60px;
+padding:40px 60px;
+
 }
 
-/* CARTES */
-
 .card{
+
 background:#111;
 border-radius:20px;
 overflow:hidden;
@@ -65,6 +103,7 @@ text-align:center;
 cursor:pointer;
 transition:0.3s;
 animation:float 4s ease-in-out infinite;
+
 }
 
 .card img{
@@ -85,9 +124,11 @@ box-shadow:0 0 25px #a100ff;
 /* FLOTTEMENT */
 
 @keyframes float{
+
 0%{transform:translateY(0)}
 50%{transform:translateY(-10px)}
 100%{transform:translateY(0)}
+
 }
 
 </style>
@@ -110,17 +151,25 @@ box-shadow:0 0 25px #a100ff;
 Personnalise tes pièces moto 3D
 </div>
 
-<section class="products">
+<!-- SEMI / FULL -->
 
-<a class="card" href="semi-perso.html">
+<section class="top-products">
+
+<a class="big-card" href="semi-perso.html">
 <img src="images/semiperso.png">
-<h3>Semi Perso</h3>
+<h2>Semi Perso</h2>
 </a>
 
-<a class="card" href="fullperso.html">
+<a class="big-card" href="fullperso.html">
 <img src="images/fullperso.png">
-<h3>Full Perso</h3>
+<h2>Full Perso</h2>
 </a>
+
+</section>
+
+<!-- PIECES -->
+
+<section class="products">
 
 <a class="card" href="configurateur.html?piece=cache_allumage">
 <img src="images/allumage.png">
