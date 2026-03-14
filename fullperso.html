@@ -4,15 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Full Perso</title>
+<title>Configurateur 3D</title>
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 
 </head>
 
@@ -39,114 +37,111 @@
 
 <section style="padding:100px;text-align:center">
 
-<h1>Demande de pièce Full Perso</h1>
+<h1>Configurateur Semi Perso</h1>
 
-<form id="customForm" style="max-width:500px;margin:auto;text-align:left">
+<div id="viewer" style="width:800px;height:500px;margin:auto"></div>
 
-<label>Nom</label>
-<input type="text" id="name" required>
+<br>
 
-<br><br>
-
-<label>Email</label>
-<input type="email" id="email" required>
+<label>Couleur :</label>
+<input type="color" id="colorPicker" value="#a100ff">
 
 <br><br>
 
-<label>Nom de la pièce</label>
-<input type="text" id="piece" required>
-
-<br><br>
-
-<label>Moto / modèle</label>
-<input type="text" id="moto">
-
-<br><br>
-
-<label>Couleur souhaitée</label>
-<input type="text" id="color">
-
-<br><br>
-
-<label>Description</label>
-<textarea id="description"></textarea>
-
-<br><br>
-
-<button type="submit">Envoyer la demande</button>
-
-</form>
+<button onclick="addToCart()">Ajouter au panier</button>
 
 </section>
 
 
 <script>
 
-/* FIREBASE CONFIG */
+const scene = new THREE.Scene()
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB8zyAwlTAkOcFi9IU3VOkKb0HaxNwCQ4E",
-  authDomain: "designedbyglit.firebaseapp.com",
-  projectId: "designedbyglit",
-  storageBucket: "designedbyglit.firebasestorage.app",
-  messagingSenderId: "694213083753",
-  appId: "1:694213083753:web:691f3b62975c2a3db318f8"
-};
+const camera = new THREE.PerspectiveCamera(75,800/500,0.1,1000)
 
-firebase.initializeApp(firebaseConfig)
+const renderer = new THREE.WebGLRenderer({antialias:true})
 
-const db = firebase.firestore()
+renderer.setSize(800,500)
 
-/* EMAILJS */
+document.getElementById("viewer").appendChild(renderer.domElement)
 
-emailjs.init("YOUR_PUBLIC_KEY")
+const controls = new THREE.OrbitControls(camera,renderer.domElement)
 
-/* FORMULAIRE */
+const light1 = new THREE.PointLight(0xffffff,1)
+light1.position.set(5,5,5)
+scene.add(light1)
 
-document.getElementById("customForm").addEventListener("submit", async function(e){
+const light2 = new THREE.AmbientLight(0xffffff,0.6)
+scene.add(light2)
 
-e.preventDefault()
+let piece
 
-const name = document.getElementById("name").value
-const email = document.getElementById("email").value
-const piece = document.getElementById("piece").value
-const moto = document.getElementById("moto").value
-const color = document.getElementById("color").value
-const description = document.getElementById("description").value
+const loader = new THREE.STLLoader()
+
+loader.load(
+
+"models/piece.stl",
+
+function(geometry){
+
+const material = new THREE.MeshStandardMaterial({
+color:0xa100ff,
+metalness:0.3,
+roughness:0.4
+})
+
+piece = new THREE.Mesh(geometry,material)
+
+geometry.center()
+
+scene.add(piece)
+
+}
+
+)
+
+camera.position.z = 120
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+if(piece){
+piece.rotation.y += 0.01
+}
+
+renderer.render(scene,camera)
+
+}
+
+animate()
 
 
-/* FIREBASE SAVE */
+document.getElementById("colorPicker").addEventListener("input",function(){
 
-await db.collection("customOrders").add({
+if(piece){
 
-name,
-email,
-piece,
-moto,
-color,
-description,
-date: new Date()
+piece.material.color.set(this.value)
+
+}
 
 })
 
 
-/* EMAIL */
+function addToCart(){
 
-emailjs.send("YOUR_SERVICE","YOUR_TEMPLATE",{
+let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-name:name,
-email:email,
-piece:piece,
-moto:moto,
-color:color,
-description:description
-
+cart.push({
+name:"Piece Semi Perso",
+price:30
 })
 
+localStorage.setItem("cart",JSON.stringify(cart))
 
-alert("Demande envoyée !")
+alert("Produit ajouté au panier")
 
-})
+}
 
 </script>
 
