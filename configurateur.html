@@ -23,7 +23,7 @@ background:black;
 
 #viewer{
 width:100%;
-height:500px;
+height:600px;
 }
 
 .controls{
@@ -52,16 +52,20 @@ cursor:pointer;
 <body>
 
 <header>
+
 <a href="index.html">Accueil</a>
+
 <div>Configurateur</div>
+
 <a href="panier.html">Panier</a>
+
 </header>
 
 <div id="viewer"></div>
 
 <div class="controls">
 
-<label>Type moteur :</label>
+<label>Moteur :</label>
 
 <select id="moteur" onchange="loadPiece()">
 <option value="am6">AM6</option>
@@ -70,7 +74,7 @@ cursor:pointer;
 
 <br><br>
 
-<label>Pièce à colorer :</label>
+<label>Pièce :</label>
 
 <select id="pieceSelect"></select>
 
@@ -81,7 +85,6 @@ cursor:pointer;
 <button onclick="setColor('#ff0000')">Rouge</button>
 <button onclick="setColor('#0000ff')">Bleu</button>
 <button onclick="setColor('#a100ff')">Violet</button>
-<button onclick="setColor('#ff7b00')">Orange</button>
 
 </div>
 
