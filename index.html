@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+
+<html>
 
 <head>
 
 <meta charset="UTF-8">
-<title>Pièces Moto 3D</title>
+
+<title>Designed By Glit</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,154 +14,110 @@
 
 <body>
 
+
 <header>
 
-<div class="nav-left">
+<div class="menu">
+
 <a href="index.html">Accueil</a>
-<a href="#produits">Produits</a>
-<a href="panier.html" class="cart-icon">
-Panier
-<span id="cart-count">0</span>
-</a>
+
+<a href="#">Produits</a>
+
+<a href="#">Panier (<span id="cart-count">0</span>)</a>
+
 </div>
 
 <div class="logo">
-<a href="index.html">
-<img src="logo.png">
-</a>
+
+Designed By Glit
+
 </div>
 
-<div class="nav-right">
-<a href="compte.html">Connexion / Inscription</a>
+<div class="account">
+
+<a href="compte.html">Connexion</a>
+
 </div>
 
 </header>
 
-<section class="hero-moto">
-
-<h1>Pièces Moto Imprimées en 3D</h1>
-
-</section>
 
 
-<section class="choix">
-
-<a href="configurateur.html">
-
-<div class="choix-card">
-
-<img src="images/semi.jpg">
-
-<div class="choix-text">
-Semi‑Perso
-</div>
-
-</div>
-
-</a>
-
-
-<a href="fullperso.html">
-
-<div class="choix-card">
-
-<img src="images/full.jpg">
-
-<div class="choix-text">
-Full‑Perso
-</div>
-
-</div>
-
-</a>
-
-</section>
-
-
-<section class="produits" id="produits">
+<section class="products">
 
 <h2>Nos Produits</h2>
 
+
 <div class="grid">
 
-<div class="card">
-<img src="images/p1.jpg">
-<div class="card-content">
-<h3>Cache Allumage</h3>
-<div class="price">30€</div>
-<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
-</div>
+
+<div class="product">
+
+<img src="images/cache_allumage.jpg">
+
+<h3>Cache allumage</h3>
+
+<p>30€</p>
+
+<button onclick="addToCart('Cache allumage',30)">
+Ajouter au panier
+</button>
+
+<a href="https://buy.stripe.com/test_bJe00cfptet1e747JU1RC00">
+
+<button class="buy">
+Acheter
+</button>
+
+</a>
+
 </div>
 
 
-<div class="card">
-<img src="images/p2.jpg">
-<div class="card-content">
+<div class="product">
+
+<img src="images/cache_pignon.jpg">
+
 <h3>Cache Pignon</h3>
-<div class="price">15€</div>
-<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
-</div>
+
+<p>15€</p>
+
+<button onclick="addToCart('Cache Pignon',15)">
+Ajouter au panier
+</button>
+
 </div>
 
 
-<div class="card">
-<img src="images/p3.jpg">
-<div class="card-content">
+<div class="product">
+
+<img src="images/support_durite.jpg">
+
 <h3>Support Durite</h3>
-<div class="price">6€</div>
-<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
-</div>
+
+<p>6€</p>
+
+<button onclick="addToCart('Support Durite',6)">
+Ajouter au panier
+</button>
+
 </div>
 
 
-<div class="card">
-<img src="images/p4.jpg">
-<div class="card-content">
+<div class="product">
+
+<img src="images/butee_bielette.jpg">
+
 <h3>Butée de Bielette</h3>
-<div class="price">10€</div>
-<button onclick="addToCart('Butée de Bielette',10)">Ajouter au panier</button>
-</div>
+
+<p>10€</p>
+
+<button onclick="addToCart('Butée de Bielette',10)">
+Ajouter au panier
+</button>
+
 </div>
 
-
-<div class="card">
-<img src="images/p5.jpg">
-<div class="card-content">
-<h3>Cache Obturateur</h3>
-<div class="price">12€</div>
-<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
-</div>
-</div>
-
-
-<div class="card">
-<img src="images/p6.jpg">
-<div class="card-content">
-<h3>Récupérateur de fluides</h3>
-<div class="price">16€</div>
-<button onclick="addToCart('Récupérateur',16)">Ajouter au panier</button>
-</div>
-</div>
-
-
-<div class="card">
-<img src="images/p7.jpg">
-<div class="card-content">
-<h3>Pipe Performance</h3>
-<div class="price">20€</div>
-<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
-</div>
-</div>
-
-
-<div class="card">
-<img src="images/p8.jpg">
-<div class="card-content">
-<h3>Adaptation Radia Derbi</h3>
-<div class="price">25€</div>
-<button onclick="addToCart('Adaptation Radia Derbi',25)">Ajouter au panier</button>
-</div>
-</div>
 
 </div>
 
@@ -168,4 +126,5 @@ Full‑Perso
 <script src="panier.js"></script>
 
 </body>
+
 </html>
