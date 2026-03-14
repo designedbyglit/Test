@@ -9,19 +9,12 @@
 body{
 margin:0;
 background:#111;
+overflow:hidden;
 }
 
 #viewer{
 width:100%;
 height:100vh;
-}
-
-button{
-position:absolute;
-top:20px;
-left:20px;
-padding:10px 20px;
-z-index:10;
 }
 </style>
 
@@ -30,8 +23,6 @@ z-index:10;
 <body>
 
 <div id="viewer"></div>
-
-<button onclick="changeColor()">Changer couleur</button>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -48,6 +39,8 @@ window.innerWidth/window.innerHeight,
 10000
 )
 
+camera.position.set(0,0,200)
+
 const renderer = new THREE.WebGLRenderer({antialias:true})
 renderer.setSize(window.innerWidth,window.innerHeight)
 
@@ -55,54 +48,23 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 const controls = new THREE.OrbitControls(camera,renderer.domElement)
 
-const light = new THREE.DirectionalLight(0xffffff,1)
-light.position.set(100,100,100)
-scene.add(light)
+const light1 = new THREE.DirectionalLight(0xffffff,1)
+light1.position.set(100,100,100)
 
-scene.add(new THREE.AmbientLight(0xffffff,0.6))
-
-let model
+scene.add(light1)
+scene.add(new THREE.AmbientLight(0xffffff,0.7))
 
 const loader = new THREE.GLTFLoader()
 
-loader.load("models/yes.glb", function(gltf){
+loader.load("./models/yes.glb", function(gltf){
 
-model = gltf.scene
+const model = gltf.scene
+
 scene.add(model)
 
-/* CENTRER LA PIECE */
-
-const box = new THREE.Box3().setFromObject(model)
-const center = box.getCenter(new THREE.Vector3())
-const size = box.getSize(new THREE.Vector3())
-
-model.position.sub(center)
-
-/* POSITION CAMERA */
-
-const maxDim = Math.max(size.x, size.y, size.z)
-const distance = maxDim * 2
-
-camera.position.set(distance, distance, distance)
-
-controls.target.set(0,0,0)
-controls.update()
+console.log("MODELE CHARGE")
 
 })
-
-function changeColor(){
-
-if(!model) return
-
-model.traverse(function(child){
-
-if(child.isMesh){
-child.material.color.set("#ff0000")
-}
-
-})
-
-}
 
 function animate(){
 
