@@ -14,28 +14,26 @@
 
 <header>
 
-<div>
 <a href="index.html">Accueil</a>
-<a href="#">Produits</a>
-<a href="#">Compte</a>
-</div>
 
 <div class="logo">
 <img src="images/logo.png">
 </div>
 
-<div>
-<a href="panier.html">Panier 🛒 <span id="cartCount">0</span></a>
-</div>
+<a href="panier.html">
+Panier (<span id="cartCount">0</span>)
+</a>
 
 </header>
 
+
+<!-- HERO -->
 
 <section class="hero">
 
 <a href="configurateur.html" class="hero-card">
 
-<img src="images/semi.jpg">
+<img src="images/semi_perso.jpg">
 
 <div class="hero-text">
 Semi Perso
@@ -43,10 +41,9 @@ Semi Perso
 
 </a>
 
-
 <a href="fullperso.html" class="hero-card">
 
-<img src="images/full.jpg">
+<img src="images/full_perso.jpg">
 
 <div class="hero-text">
 Full Perso
@@ -56,67 +53,135 @@ Full Perso
 
 </section>
 
+
+<!-- PRODUITS -->
+
 <section class="products">
 
 <h2>Nos pièces</h2>
 
 <div class="product-grid">
 
-<div class="product-card">
+
+<a href="produit.html?name=cache_allumage" class="product-card">
+
 <img src="images/cache_allumage.jpg">
+
 <h3>Cache Allumage</h3>
+
 <p>30€</p>
-<button onclick="addToCart('Cache Allumage',30)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Cache Allumage',30);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=cache_pignon" class="product-card">
+
 <img src="images/cache_pignon.jpg">
+
 <h3>Cache Pignon</h3>
+
 <p>15€</p>
-<button onclick="addToCart('Cache Pignon',15)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Cache Pignon',15);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=support_durite" class="product-card">
+
 <img src="images/support_durite.jpg">
+
 <h3>Support Durite</h3>
+
 <p>6€</p>
-<button onclick="addToCart('Support Durite',6)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Support Durite',6);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=butee_biellette" class="product-card">
+
 <img src="images/butee_biellette.jpg">
+
 <h3>Butée de Biellette</h3>
+
 <p>10€</p>
-<button onclick="addToCart('Butée Biellette',10)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Butée Biellette',10);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=cache_obturateur" class="product-card">
+
 <img src="images/cache_obturateur.jpg">
+
 <h3>Cache Obturateur</h3>
+
 <p>12€</p>
-<button onclick="addToCart('Cache Obturateur',12)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Cache Obturateur',12);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=recuperateur" class="product-card">
+
 <img src="images/recuperateur.jpg">
+
 <h3>Récupérateur de fluides</h3>
+
 <p>16€</p>
-<button onclick="addToCart('Recuperateur',16)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<button onclick="addToCart('Recuperateur',16);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=pipe" class="product-card">
+
 <img src="images/pipe.jpg">
-<h3>Pipe Performance</h3>
-<p>20€</p>
-<button onclick="addToCart('Pipe Performance',20)">Ajouter au panier</button>
-</div>
 
-<div class="product-card">
+<h3>Pipe Performance</h3>
+
+<p>20€</p>
+
+<button onclick="addToCart('Pipe Performance',20);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
+
+<a href="produit.html?name=radia_derbi" class="product-card">
+
 <img src="images/radia_derbi.jpg">
+
 <h3>Adaptation Radia Derbi</h3>
+
 <p>25€</p>
-<button onclick="addToCart('Radia Derbi',25)">Ajouter au panier</button>
-</div>
+
+<button onclick="addToCart('Radia Derbi',25);event.preventDefault();">
+Ajouter au panier
+</button>
+
+</a>
+
 
 </div>
 
@@ -125,15 +190,8 @@ Full Perso
 
 <script>
 
-/* compteur panier */
 
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-document.getElementById("cartCount").innerText = cart.length
-
-</script>
-
-<script>
+/* PANIER */
 
 function addToCart(name,price){
 
@@ -147,22 +205,30 @@ qty:1
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-alert(name+" ajouté au panier")
-
 document.getElementById("cartCount").innerText = cart.length
+
+alert(name+" ajouté au panier")
 
 }
 
-</script>
 
-<script>
+/* compteur panier */
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+document.getElementById("cartCount").innerText = cart.length
+
+
+/* animation scroll */
 
 const observer = new IntersectionObserver(entries => {
 
 entries.forEach(entry => {
 
 if(entry.isIntersecting){
+
 entry.target.classList.add("show")
+
 }
 
 })
@@ -176,6 +242,7 @@ observer.observe(el)
 })
 
 </script>
-  
+
+
 </body>
 </html>
