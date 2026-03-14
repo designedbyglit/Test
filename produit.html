@@ -4,9 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Personnaliser</title>
+<title>Personnaliser pièce</title>
 
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 
 </head>
 
@@ -24,17 +28,14 @@
 
 </header>
 
+
 <section class="products">
 
-<h1>Personnalisation</h1>
+<h1 id="title"></h1>
+
+<div id="viewer" style="width:500px;height:500px;margin:auto"></div>
 
 <br>
-
-<div style="max-width:500px;margin:auto">
-
-<img id="preview" src="images/cache_allumage.jpg" style="width:100%;border-radius:20px">
-
-<br><br>
 
 <label>Couleur :</label>
 
@@ -44,21 +45,104 @@
 
 <button onclick="addToCart()">Ajouter au panier</button>
 
-</div>
-
 </section>
+
 
 <script>
 
-const preview = document.getElementById("preview")
-const colorPicker = document.getElementById("colorPicker")
+/* récupérer le produit dans l'URL */
 
-colorPicker.addEventListener("input",()=>{
+const params = new URLSearchParams(window.location.search)
+const product = params.get("name")
 
-preview.style.filter="drop-shadow(0 0 20px "+colorPicker.value+")"
+document.getElementById("title").innerText = product
+
+
+/* correspondance STL */
+
+const models = {
+
+cache_allumage:"models/cache_allumage.stl",
+cache_pignon:"models/cache_pignon.stl",
+support_durite:"models/support_durite.stl",
+butee_biellette:"models/butee_biellette.stl",
+cache_obturateur:"models/cache_obturateur.stl",
+recuperateur:"models/recuperateur.stl",
+pipe:"models/pipe.stl",
+radia_derbi:"models/radia_derbi.stl"
+
+}
+
+
+/* THREE JS */
+
+let scene = new THREE.Scene()
+
+let camera = new THREE.PerspectiveCamera(
+75,
+500/500,
+0.1,
+1000
+)
+
+let renderer = new THREE.WebGLRenderer({alpha:true})
+
+renderer.setSize(500,500)
+
+document.getElementById("viewer").appendChild(renderer.domElement)
+
+let light = new THREE.DirectionalLight(0xffffff,1)
+
+light.position.set(0,0,10)
+
+scene.add(light)
+
+let material = new THREE.MeshStandardMaterial({
+color:0xa100ff,
+metalness:0.7,
+roughness:0.2
+})
+
+let loader = new THREE.STLLoader()
+
+let mesh
+
+loader.load(models[product],function(geometry){
+
+mesh = new THREE.Mesh(geometry,material)
+
+geometry.center()
+
+scene.add(mesh)
 
 })
 
+camera.position.z = 100
+
+let controls = new THREE.OrbitControls(camera,renderer.domElement)
+
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+renderer.render(scene,camera)
+
+}
+
+animate()
+
+
+/* changer couleur */
+
+document.getElementById("colorPicker").addEventListener("input",e=>{
+
+material.color.set(e.target.value)
+
+})
+
+
+/* panier */
 
 function addToCart(){
 
@@ -66,21 +150,20 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 cart.push({
 
-name:"Pièce personnalisée",
+name:product,
 price:30,
-color:colorPicker.value,
+color:document.getElementById("colorPicker").value,
 qty:1
 
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-alert("Produit ajouté au panier")
+alert("Ajouté au panier")
 
 }
 
 </script>
 
 </body>
-
 </html>
