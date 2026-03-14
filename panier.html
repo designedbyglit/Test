@@ -4,48 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <title>Panier</title>
 
 <link rel="stylesheet" href="style.css">
-
-<style>
-
-.panier{
-
-padding:120px 60px;
-
-}
-
-.cart-item{
-
-display:flex;
-
-justify-content:space-between;
-
-background:white;
-
-padding:20px;
-
-margin-bottom:10px;
-
-border-radius:8px;
-
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-
-}
-
-#total{
-
-margin-top:30px;
-
-font-size:24px;
-
-font-weight:bold;
-
-}
-
-</style>
 
 </head>
 
@@ -53,37 +14,92 @@ font-weight:bold;
 
 <header>
 
-<div class="nav-left">
 <a href="index.html">Accueil</a>
-<a href="index.html#produits">Produits</a>
-<a href="panier.html">Panier</a>
-</div>
 
 <div class="logo">
-<a href="index.html">
-<img src="logo.png">
-</a>
+<img src="images/logo.png">
 </div>
 
-<div class="nav-right">
-<a href="#">Connexion / Inscription</a>
-</div>
+<a href="panier.html">Panier</a>
 
 </header>
 
 
-<div class="panier">
+<section class="products">
 
-<h1>Votre Panier</h1>
+<h1>Ton Panier</h1>
 
-<div id="cart-items"></div>
+<div id="cart"></div>
 
-<div id="total"></div>
+<br>
+
+<h2 id="total"></h2>
+
+</section>
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+function renderCart(){
+
+let container = document.getElementById("cart")
+
+container.innerHTML = ""
+
+let total = 0
+
+cart.forEach((item,index)=>{
+
+total += item.price * (item.qty || 1)
+
+container.innerHTML += `
+
+<div class="product-card">
+
+<h3>${item.name}</h3>
+
+<p>${item.price}€</p>
+
+<input type="number" min="1" value="${item.qty || 1}" onchange="updateQty(${index},this.value)">
+
+<button onclick="removeItem(${index})">Supprimer</button>
 
 </div>
 
-<script src="panier.js"></script>
+`
+
+})
+
+document.getElementById("total").innerText = "Total : "+total+"€"
+
+}
+
+
+function updateQty(index,qty){
+
+cart[index].qty = parseInt(qty)
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+renderCart()
+
+}
+
+function removeItem(index){
+
+cart.splice(index,1)
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+renderCart()
+
+}
+
+renderCart()
+
+</script>
 
 </body>
-
 </html>
