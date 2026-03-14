@@ -1,39 +1,38 @@
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(180deg,#0f0f1a,#1a0033);
+background:linear-gradient(180deg,#0c0c1a,#1b0033);
 color:white;
-overflow-x:hidden;
 }
 
-/* NUAGES FUTURISTES */
+
+/* FOND NUAGES FUTURISTES */
 
 body::before{
 
 content:"";
 
 position:fixed;
-
 top:0;
 left:0;
 
 width:200%;
 height:200%;
 
-background:url("https://www.transparenttextures.com/patterns/cloudy.png");
+background:radial-gradient(circle,#ffffff22 1px,transparent 1px);
 
-opacity:0.15;
+background-size:120px 120px;
 
-animation:cloudmove 60s linear infinite;
+animation:clouds 40s linear infinite;
 
 z-index:-1;
 
 }
 
-@keyframes cloudmove{
+@keyframes clouds{
 
 0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+100%{transform:translateX(-400px);}
 
 }
 
@@ -42,21 +41,15 @@ z-index:-1;
 
 header{
 
-position:fixed;
-top:0;
-width:100%;
-height:70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:20px 40px;
 
 background:rgba(0,0,0,0.6);
+
 backdrop-filter:blur(10px);
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding:0 40px;
-
-z-index:1000;
 
 }
 
@@ -67,17 +60,10 @@ height:45px;
 .nav-left a,
 .nav-right a{
 
-margin-right:20px;
-text-decoration:none;
 color:white;
+text-decoration:none;
+margin-right:20px;
 font-weight:bold;
-transition:0.3s;
-
-}
-
-.nav-left a:hover{
-
-color:#a100ff;
 
 }
 
@@ -87,7 +73,6 @@ color:#a100ff;
 .hero{
 
 display:flex;
-margin-top:90px;
 
 }
 
@@ -102,49 +87,40 @@ overflow:hidden;
 .hero-card img{
 
 width:100%;
-height:350px;
+height:400px;
 
 object-fit:cover;
 
-transition:0.5s;
-
 }
 
-.hero-card:hover img{
-
-transform:scale(1.1);
-
-}
-
-.hero-button{
+.hero-text{
 
 position:absolute;
 
-bottom:30px;
-left:30px;
+top:50%;
+left:50%;
 
-background:#a100ff;
+transform:translate(-50%,-50%);
 
-color:white;
+font-size:40px;
 
-padding:14px 28px;
+font-weight:bold;
+
+background:rgba(0,0,0,0.6);
+
+padding:20px 40px;
 
 border-radius:10px;
-
-text-decoration:none;
-
-font-size:18px;
-
-box-shadow:0 0 20px #a100ff;
 
 }
 
 
-/* SECTION PRODUITS */
+/* PRODUITS */
 
 .products{
 
 padding:80px;
+
 text-align:center;
 
 }
@@ -155,9 +131,9 @@ display:grid;
 
 grid-template-columns:repeat(4,1fr);
 
-gap:35px;
+gap:30px;
 
-margin-top:50px;
+margin-top:40px;
 
 }
 
@@ -170,15 +146,13 @@ background:rgba(255,255,255,0.05);
 
 padding:20px;
 
-border-radius:18px;
+border-radius:15px;
 
-backdrop-filter:blur(10px);
+transition:0.3s;
 
-transition:0.4s;
+box-shadow:0 0 10px #a100ff44;
 
 animation:float 4s ease-in-out infinite;
-
-box-shadow:0 0 15px rgba(161,0,255,0.3);
 
 }
 
@@ -194,7 +168,7 @@ box-shadow:0 0 15px rgba(161,0,255,0.3);
 }
 
 
-/* IMAGE PRODUIT */
+/* IMAGES PRODUITS */
 
 .product img{
 
@@ -203,87 +177,29 @@ height:200px;
 
 object-fit:cover;
 
-border-radius:14px;
-
-transition:0.4s;
-
-}
-
-
-/* HOVER IMAGE */
-
-.product:hover img{
-
-transform:scale(1.08);
-
-}
-
-
-/* GLOW VIOLET */
-
-.product:hover{
-
-box-shadow:
-
-0 0 20px #a100ff,
-0 0 40px #a100ff,
-0 0 60px #a100ff;
-
-transform:scale(1.05);
-
-}
-
-
-/* BOUTONS */
-
-button{
-
-background:#a100ff;
-
-color:white;
-
-border:none;
-
-padding:10px 20px;
-
-margin-top:10px;
-
-cursor:pointer;
-
-border-radius:8px;
+border-radius:12px;
 
 transition:0.3s;
 
 }
 
-button:hover{
+
+/* HOVER NEON */
+
+.product:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+
+0 0 15px #a100ff,
+0 0 35px #a100ff,
+0 0 60px #a100ff;
+
+}
+
+.product:hover img{
 
 transform:scale(1.05);
-
-box-shadow:0 0 15px #a100ff;
-
-}
-
-
-/* SCROLL ANIMATION */
-
-.product{
-
-opacity:0;
-
-transform:translateY(40px);
-
-animation:fadeUp 1s forwards;
-
-}
-
-@keyframes fadeUp{
-
-to{
-
-opacity:1;
-transform:translateY(0);
-
-}
 
 }
