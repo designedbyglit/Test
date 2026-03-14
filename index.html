@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 
 <head>
 
 <meta charset="UTF-8">
-
 <title>Designed By Glit</title>
 
 <link rel="stylesheet" href="style.css">
@@ -14,32 +12,48 @@
 
 <body>
 
-
 <header>
 
-<div class="menu">
-
+<div class="nav-left">
 <a href="index.html">Accueil</a>
-
 <a href="#">Produits</a>
-
 <a href="#">Panier (<span id="cart-count">0</span>)</a>
-
 </div>
 
 <div class="logo">
-
-Designed By Glit
-
+<img src="logo.png" style="height:50px;">
 </div>
 
-<div class="account">
-
-<a href="compte.html">Connexion</a>
-
+<div class="nav-right">
+<a href="compte.html">Connexion / Inscription</a>
 </div>
 
 </header>
+
+
+<section class="hero">
+
+<div class="hero-card">
+
+<img src="semi.jpg">
+
+<a href="semi.html" class="hero-button">
+Semi‑Perso
+</a>
+
+</div>
+
+<div class="hero-card">
+
+<img src="full.jpg">
+
+<a href="full.html" class="hero-button">
+Full‑Perso
+</a>
+
+</div>
+
+</section>
 
 
 
@@ -47,21 +61,16 @@ Designed By Glit
 
 <h2>Nos Produits</h2>
 
-
 <div class="grid">
 
 
 <div class="product">
 
-<img src="images/cache_allumage.jpg">
+<img src="cache_allumage.jpg">
 
 <h3>Cache allumage</h3>
 
 <p>30€</p>
-
-<button onclick="addToCart('Cache allumage',30)">
-Ajouter au panier
-</button>
 
 <a href="https://buy.stripe.com/test_bJe00cfptet1e747JU1RC00">
 
@@ -76,13 +85,13 @@ Acheter
 
 <div class="product">
 
-<img src="images/cache_pignon.jpg">
+<img src="cache_pignon.jpg">
 
 <h3>Cache Pignon</h3>
 
 <p>15€</p>
 
-<button onclick="addToCart('Cache Pignon',15)">
+<button>
 Ajouter au panier
 </button>
 
@@ -91,13 +100,13 @@ Ajouter au panier
 
 <div class="product">
 
-<img src="images/support_durite.jpg">
+<img src="support_durite.jpg">
 
 <h3>Support Durite</h3>
 
 <p>6€</p>
 
-<button onclick="addToCart('Support Durite',6)">
+<button>
 Ajouter au panier
 </button>
 
@@ -106,13 +115,73 @@ Ajouter au panier
 
 <div class="product">
 
-<img src="images/butee_bielette.jpg">
+<img src="butee_bielette.jpg">
 
 <h3>Butée de Bielette</h3>
 
 <p>10€</p>
 
-<button onclick="addToCart('Butée de Bielette',10)">
+<button>
+Ajouter au panier
+</button>
+
+</div>
+
+
+<div class="product">
+
+<img src="obturateur.jpg">
+
+<h3>Cache Obturateur</h3>
+
+<p>12€</p>
+
+<button>
+Ajouter au panier
+</button>
+
+</div>
+
+
+<div class="product">
+
+<img src="recuperateur.jpg">
+
+<h3>Récupérateur de fluides</h3>
+
+<p>16€</p>
+
+<button>
+Ajouter au panier
+</button>
+
+</div>
+
+
+<div class="product">
+
+<img src="pipe.jpg">
+
+<h3>Pipe Performance</h3>
+
+<p>20€</p>
+
+<button>
+Ajouter au panier
+</button>
+
+</div>
+
+
+<div class="product">
+
+<img src="adaptation_radia.jpg">
+
+<h3>Adaptation Radia Derbi</h3>
+
+<p>25€</p>
+
+<button>
 Ajouter au panier
 </button>
 
@@ -122,6 +191,7 @@ Ajouter au panier
 </div>
 
 </section>
+
 
 <script src="panier.js"></script>
 
