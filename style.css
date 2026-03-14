@@ -163,7 +163,6 @@ transform:translateY(0px)
 .products{
 
 padding:80px;
-
 text-align:center;
 
 }
@@ -172,10 +171,14 @@ text-align:center;
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+/* 4 produits par ligne */
+grid-template-columns:repeat(4,1fr);
 
 gap:30px;
 
+max-width:1200px;
+
+margin:auto;
 margin-top:40px;
 
 }
@@ -193,9 +196,13 @@ border-radius:20px;
 
 transition:0.4s;
 
+/* effet flottant */
 animation:floatCard 5s ease-in-out infinite;
 
 }
+
+
+/* IMAGE PRODUIT */
 
 .product-card img{
 
@@ -209,7 +216,7 @@ border-radius:15px;
 }
 
 
-/* HOVER PRODUITS */
+/* HOVER NEON */
 
 .product-card:hover{
 
@@ -224,18 +231,15 @@ box-shadow:
 }
 
 
-/* FLOAT PRODUITS */
+/* FLOAT ANIMATION */
 
 @keyframes floatCard{
 
 0%{transform:translateY(0px)}
-
-50%{transform:translateY(-8px)}
-
+50%{transform:translateY(-10px)}
 100%{transform:translateY(0px)}
 
 }
-
 
 /* BOUTONS */
 
