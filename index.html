@@ -14,18 +14,18 @@
 
 <header>
 
-<div class="nav-left">
+<div>
 <a href="index.html">Accueil</a>
 <a href="#">Produits</a>
-<a href="#">Panier</a>
+<a href="#">Compte</a>
 </div>
 
 <div class="logo">
 <img src="images/logo.png">
 </div>
 
-<div class="nav-right">
-<a href="#">Compte</a>
+<div>
+<a href="panier.html">Panier 🛒 <span id="cartCount">0</span></a>
 </div>
 
 </header>
@@ -55,6 +55,17 @@ Full Perso
 </a>
 
 </section>
+
+
+<script>
+
+/* compteur panier */
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+document.getElementById("cartCount").innerText = cart.length
+
+</script>
 
 </body>
 </html>
