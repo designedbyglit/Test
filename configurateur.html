@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-
 <meta charset="UTF-8">
 <title>Configurateur</title>
 
@@ -28,15 +27,15 @@ height:500px;
 }
 
 .controls{
-text-align:center;
 padding:20px;
+text-align:center;
 }
 
 button{
 
 background:#a100ff;
 border:none;
-padding:10px 20px;
+padding:10px 15px;
 margin:5px;
 color:white;
 border-radius:10px;
@@ -44,8 +43,12 @@ cursor:pointer;
 
 }
 
-</style>
+select{
+padding:8px;
+margin:10px;
+}
 
+</style>
 </head>
 
 <body>
@@ -64,11 +67,25 @@ cursor:pointer;
 
 <div class="controls">
 
-<button onclick="setColor('#ff0000')">Rouge</button>
-<button onclick="setColor('#00ff00')">Vert</button>
-<button onclick="setColor('#0000ff')">Bleu</button>
-<button onclick="setColor('#ffffff')">Blanc</button>
+<label>Type moteur :</label>
+
+<select id="moteur" onchange="loadPiece()">
+<option value="am6">AM6</option>
+<option value="e3">€3</option>
+</select>
+
+<br><br>
+
 <button onclick="setColor('#000000')">Noir</button>
+<button onclick="setColor('#ffffff')">Blanc</button>
+<button onclick="setColor('#ff0000')">Rouge</button>
+<button onclick="setColor('#0000ff')">Bleu</button>
+<button onclick="setColor('#a100ff')">Violet</button>
+<button onclick="setColor('#ff7b00')">Orange</button>
+
+<br><br>
+
+<button onclick="addToCart()">Ajouter au panier</button>
 
 </div>
 
@@ -76,97 +93,7 @@ cursor:pointer;
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
 
-<script>
-
-const params = new URLSearchParams(window.location.search)
-const piece = params.get("piece")
-
-let stl = ""
-
-if(piece=="recuperateur"){
-stl="models/recup_e3_base.stl"
-}
-
-if(piece=="support_durite"){
-stl="models/support_e3.stl"
-}
-
-if(piece=="cache_pignon"){
-stl="models/pignon_e3_base.stl"
-}
-
-if(piece=="cache_allumage"){
-stl="models/cache_e3_base.stl"
-}
-
-if(piece=="obturateur"){
-stl="models/obturateur_e3_base.stl"
-}
-
-if(piece=="biellette"){
-stl="models/biellette.stl"
-}
-
-let scene = new THREE.Scene()
-
-let camera = new THREE.PerspectiveCamera(
-75,
-window.innerWidth/500,
-0.1,
-1000
-)
-
-let renderer = new THREE.WebGLRenderer({antialias:true})
-
-renderer.setSize(window.innerWidth,500)
-
-document.getElementById("viewer").appendChild(renderer.domElement)
-
-camera.position.z=100
-
-let light = new THREE.DirectionalLight(0xffffff,1)
-
-light.position.set(0,1,1)
-
-scene.add(light)
-
-let mesh
-
-let loader = new THREE.STLLoader()
-
-loader.load(stl,function(geometry){
-
-let material = new THREE.MeshStandardMaterial({color:0xa100ff})
-
-mesh = new THREE.Mesh(geometry,material)
-
-geometry.center()
-
-scene.add(mesh)
-
-})
-
-function animate(){
-
-requestAnimationFrame(animate)
-
-if(mesh){
-mesh.rotation.y +=0.01
-}
-
-renderer.render(scene,camera)
-
-}
-
-animate()
-
-function setColor(color){
-
-mesh.material.color.set(color)
-
-}
-
-</script>
+<script src="js/viewer.js"></script>
 
 </body>
 </html>
