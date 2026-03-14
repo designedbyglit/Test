@@ -11,39 +11,47 @@
 body{
 margin:0;
 background:#0a0a0a;
-font-family:Arial;
 color:white;
+font-family:Arial;
 }
 
 /* HEADER */
 
 header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px;
-background:#000;
+background:black;
+
 }
 
 header a{
+
 color:white;
 text-decoration:none;
 font-size:18px;
+
 }
 
 .logo{
+
 font-size:24px;
 color:#a100ff;
 font-weight:bold;
+
 }
 
 /* PRODUITS */
 
 .products{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:30px;
-padding:40px;
+gap:40px;
+padding:60px;
+
 }
 
 .card{
@@ -51,28 +59,40 @@ padding:40px;
 background:#111;
 border-radius:20px;
 overflow:hidden;
+cursor:pointer;
 text-align:center;
 transition:0.3s;
-cursor:pointer;
-box-shadow:0 0 10px #a100ff44;
+animation:float 4s ease-in-out infinite;
+
+}
+
+.card img{
+
+width:100%;
+height:220px;
+object-fit:cover;
+
+}
+
+.card h3{
+
+padding:10px;
 
 }
 
 .card:hover{
 
-transform:scale(1.05);
+transform:scale(1.07);
 box-shadow:0 0 25px #a100ff;
 
 }
 
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
+@keyframes float{
 
-.card h3{
-padding:10px;
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+
 }
 
 </style>
