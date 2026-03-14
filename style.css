@@ -1,24 +1,63 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f5f5f5;
+background:linear-gradient(180deg,#0f0f1a,#1a0033);
+color:white;
+overflow-x:hidden;
+}
+
+/* NUAGES FUTURISTES */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:200%;
+height:200%;
+
+background:url("https://www.transparenttextures.com/patterns/cloudy.png");
+
+opacity:0.15;
+
+animation:cloudmove 60s linear infinite;
+
+z-index:-1;
+
+}
+
+@keyframes cloudmove{
+
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+
 }
 
 
 /* HEADER */
 
 header{
+
 position:fixed;
 top:0;
 width:100%;
 height:70px;
-background:white;
+
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 padding:0 40px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+
 z-index:1000;
+
 }
 
 .logo img{
@@ -27,101 +66,170 @@ height:45px;
 
 .nav-left a,
 .nav-right a{
+
 margin-right:20px;
 text-decoration:none;
-color:black;
+color:white;
 font-weight:bold;
+transition:0.3s;
+
+}
+
+.nav-left a:hover{
+
+color:#a100ff;
+
 }
 
 
-/* HERO (Semi / Full perso) */
+/* HERO */
 
 .hero{
+
 display:flex;
 margin-top:90px;
+
 }
 
 .hero-card{
+
 width:50%;
 position:relative;
 overflow:hidden;
+
 }
 
 .hero-card img{
+
 width:100%;
 height:350px;
+
 object-fit:cover;
-transition:0.4s;
+
+transition:0.5s;
+
 }
 
 .hero-card:hover img{
-transform:scale(1.08);
+
+transform:scale(1.1);
+
 }
 
 .hero-button{
+
 position:absolute;
+
 bottom:30px;
 left:30px;
-background:black;
+
+background:#a100ff;
+
 color:white;
-padding:12px 25px;
+
+padding:14px 28px;
+
+border-radius:10px;
+
 text-decoration:none;
-border-radius:8px;
+
 font-size:18px;
+
+box-shadow:0 0 20px #a100ff;
+
 }
 
 
-/* PRODUITS */
+/* SECTION PRODUITS */
 
 .products{
-padding:60px;
+
+padding:80px;
 text-align:center;
+
 }
 
 .grid{
+
 display:grid;
+
 grid-template-columns:repeat(4,1fr);
-gap:30px;
-margin-top:40px;
+
+gap:35px;
+
+margin-top:50px;
+
 }
 
 
-/* CARTE PRODUIT */
+/* CARTES PRODUITS */
 
 .product{
-background:white;
+
+background:rgba(255,255,255,0.05);
+
 padding:20px;
-border-radius:14px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-transition:0.3s;
+
+border-radius:18px;
+
+backdrop-filter:blur(10px);
+
+transition:0.4s;
+
+animation:float 4s ease-in-out infinite;
+
+box-shadow:0 0 15px rgba(161,0,255,0.3);
+
 }
 
 
-/* IMAGE PRODUITS */
+/* FLOTTEMENT */
+
+@keyframes float{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+
+}
+
+
+/* IMAGE PRODUIT */
 
 .product img{
 
 width:100%;
-height:220px;
+height:200px;
 
 object-fit:cover;
 
-border-radius:16px;
+border-radius:14px;
 
-transition:0.35s;
+transition:0.4s;
 
 }
 
 
-/* HOVER IMAGE PRODUIT */
+/* HOVER IMAGE */
 
-.product img:hover{
+.product:hover img{
 
-transform:scale(1.1);
+transform:scale(1.08);
 
-border:3px solid #a100ff;
+}
 
-box-shadow:0 0 25px #a100ff;
+
+/* GLOW VIOLET */
+
+.product:hover{
+
+box-shadow:
+
+0 0 20px #a100ff,
+0 0 40px #a100ff,
+0 0 60px #a100ff;
+
+transform:scale(1.05);
 
 }
 
@@ -130,33 +238,52 @@ box-shadow:0 0 25px #a100ff;
 
 button{
 
-background:black;
+background:#a100ff;
+
 color:white;
+
 border:none;
+
 padding:10px 20px;
+
 margin-top:10px;
+
 cursor:pointer;
+
 border-radius:8px;
-transition:0.2s;
+
+transition:0.3s;
 
 }
 
 button:hover{
 
-background:#333;
 transform:scale(1.05);
 
-}
-
-
-.buy{
-
-background:#00b894;
+box-shadow:0 0 15px #a100ff;
 
 }
 
-.buy:hover{
 
-background:#00a383;
+/* SCROLL ANIMATION */
+
+.product{
+
+opacity:0;
+
+transform:translateY(40px);
+
+animation:fadeUp 1s forwards;
+
+}
+
+@keyframes fadeUp{
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
 
 }
