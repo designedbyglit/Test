@@ -44,10 +44,10 @@ meshes[name] = mesh
 
 }
 
-loadPiece("base","models/base.STL")
-loadPiece("rond","models/rond.STL")
-loadPiece("piece1","models/piece1.STL")
-loadPiece("piece2","models/piece2.STL")
+loadPiece("base","models/base.stl")
+loadPiece("rond","models/rond.stl")
+loadPiece("piece1","models/piece1.stl")
+loadPiece("piece2","models/piece2.stl")
 
 function animate(){
 
