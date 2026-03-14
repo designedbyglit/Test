@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Personnaliser pièce</title>
+<title>Personnalisation pièce</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -28,48 +28,114 @@
 
 </header>
 
-
 <section class="products">
 
 <h1 id="title"></h1>
+
+<br>
+
+<div style="text-align:center">
+
+<button onclick="loadMotor('am6')" id="btnAM6">AM6</button>
+<button onclick="loadMotor('e3')" id="btnE3">€3</button>
+
+</div>
+
+<br>
 
 <div id="viewer" style="width:500px;height:500px;margin:auto"></div>
 
 <br>
 
-<label>Couleur :</label>
+<h3 style="text-align:center">Couleur</h3>
 
-<input type="color" id="colorPicker" value="#a100ff">
+<div class="colors">
 
-<br><br>
+<div class="color" style="background:black" onclick="setColor('#111')"></div>
+<div class="color" style="background:white" onclick="setColor('#ffffff')"></div>
+<div class="color" style="background:red" onclick="setColor('#ff0000')"></div>
+<div class="color" style="background:blue" onclick="setColor('#0066ff')"></div>
+<div class="color" style="background:purple" onclick="setColor('#a100ff')"></div>
+<div class="color" style="background:orange" onclick="setColor('#ff7700')"></div>
 
+</div>
+
+<br>
+
+<div style="text-align:center">
 <button onclick="addToCart()">Ajouter au panier</button>
+</div>
 
 </section>
 
 
 <script>
 
-/* récupérer le produit dans l'URL */
+/* récupérer produit */
 
 const params = new URLSearchParams(window.location.search)
-const product = params.get("name")
+const product = params.get("piece")
 
 document.getElementById("title").innerText = product
 
 
 /* correspondance STL */
 
-const models = {
+const pieces = {
 
-cache_allumage:"models/cache_allumage.stl",
-cache_pignon:"models/cache_pignon.stl",
-support_durite:"models/support_durite.stl",
-butee_biellette:"models/butee_biellette.stl",
-cache_obturateur:"models/cache_obturateur.stl",
-recuperateur:"models/recuperateur.stl",
-pipe:"models/pipe.stl",
-radia_derbi:"models/radia_derbi.stl"
+cache_allumage:{
+e3:[
+"models/cache_€3_base.stl",
+"models/cache_€3_rond.stl",
+"models/cache_€3_pieces1.stl",
+"models/cache_€3_pieces2.stl"
+],
+am6:[]
+},
+
+cache_pignon:{
+e3:[
+"models/pignon_€3_base.stl",
+"models/pignon_€3_pieces1.stl"
+],
+am6:[
+"models/pignon_am6_base.stl",
+"models/pignon_am6_pieces1.stl"
+]
+},
+
+support_durite:{
+e3:["models/support_€3.stl"],
+am6:["models/support_am6.stl"]
+},
+
+biellette:{
+am6:["models/biellette.stl"]
+},
+
+cache_obturateur:{
+e3:[
+"models/obturateur_€3_base.stl",
+"models/obturateur_€3_pieces1.stl",
+"models/obturateur_€3_pieces2.stl"
+],
+am6:[
+"models/obturateur_am6_base.stl",
+"models/obturateur_am6_pieces1.stl",
+"models/obturateur_am6_pieces2.stl"
+]
+},
+
+recuperateur:{
+e3:[
+"models/recup_€3_base.stl",
+"models/recup_€3_bouchon.stl"
+],
+am6:[
+"models/recup_am6_base.stl",
+"models/recup_am6_bouchon.stl"
+]
+}
 
 }
 
@@ -78,12 +144,7 @@ radia_derbi:"models/radia_derbi.stl"
 
 let scene = new THREE.Scene()
 
-let camera = new THREE.PerspectiveCamera(
-75,
-500/500,
-0.1,
-1000
-)
+let camera = new THREE.PerspectiveCamera(75,500/500,0.1,1000)
 
 let renderer = new THREE.WebGLRenderer({alpha:true})
 
@@ -98,26 +159,55 @@ light.position.set(0,0,10)
 scene.add(light)
 
 let material = new THREE.MeshStandardMaterial({
+
 color:0xa100ff,
-metalness:0.7,
-roughness:0.2
+metalness:0.6,
+roughness:0.3
+
 })
 
 let loader = new THREE.STLLoader()
 
-let mesh
+let meshes=[]
 
-loader.load(models[product],function(geometry){
 
-mesh = new THREE.Mesh(geometry,material)
+function clearScene(){
+
+meshes.forEach(m=>scene.remove(m))
+
+meshes=[]
+
+}
+
+
+/* charger moteur */
+
+function loadMotor(type){
+
+clearScene()
+
+if(!pieces[product][type]) return
+
+pieces[product][type].forEach(file=>{
+
+loader.load(file,function(geometry){
+
+let mesh = new THREE.Mesh(geometry,material)
 
 geometry.center()
 
 scene.add(mesh)
 
+meshes.push(mesh)
+
 })
 
-camera.position.z = 100
+})
+
+}
+
+
+camera.position.z = 120
 
 let controls = new THREE.OrbitControls(camera,renderer.domElement)
 
@@ -133,13 +223,13 @@ renderer.render(scene,camera)
 animate()
 
 
-/* changer couleur */
+/* couleur */
 
-document.getElementById("colorPicker").addEventListener("input",e=>{
+function setColor(color){
 
-material.color.set(e.target.value)
+material.color.set(color)
 
-})
+}
 
 
 /* panier */
@@ -151,15 +241,14 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 cart.push({
 
 name:product,
-price:30,
-color:document.getElementById("colorPicker").value,
+color:material.color.getHexString(),
 qty:1
 
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-alert("Ajouté au panier")
+alert("Produit ajouté au panier")
 
 }
 
