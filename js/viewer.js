@@ -5,17 +5,17 @@ let scene = new THREE.Scene()
 
 let camera = new THREE.PerspectiveCamera(
 75,
-window.innerWidth/500,
+window.innerWidth/600,
 0.1,
 2000
 )
 
 let renderer = new THREE.WebGLRenderer({antialias:true})
-renderer.setSize(window.innerWidth,500)
+renderer.setSize(window.innerWidth,600)
 
 document.getElementById("viewer").appendChild(renderer.domElement)
 
-camera.position.set(0,80,160)
+camera.position.set(0,80,200)
 
 /* CONTROLES SOURIS */
 
@@ -23,57 +23,51 @@ let controls = new THREE.OrbitControls(camera,renderer.domElement)
 
 controls.enableDamping = true
 controls.enableZoom = true
-controls.zoomSpeed = 1.2
 
-/* LUMIERES */
+/* LUMIERE */
 
 let light = new THREE.DirectionalLight(0xffffff,1)
 light.position.set(100,100,100)
 
 scene.add(light)
 
-let ambient = new THREE.AmbientLight(0xffffff,0.6)
-scene.add(ambient)
+scene.add(new THREE.AmbientLight(0xffffff,0.6))
 
-/* STOCKAGE PIECES */
-
-let meshes = {}
-let colors = {}
+/* STL */
 
 let loader = new THREE.STLLoader()
 
+let meshes = {}
+
 function clearScene(){
 
-for(let key in meshes){
-scene.remove(meshes[key])
+for(let m in meshes){
+scene.remove(meshes[m])
 }
 
 meshes={}
-colors={}
 
 document.getElementById("pieceSelect").innerHTML=""
 
 }
 
-/* AJOUT PIECE AVEC POSITION */
-
-function addPiece(name,path,x=0,y=0,z=0){
+function addPiece(name,path){
 
 loader.load(path,function(geometry){
 
-let material = new THREE.MeshStandardMaterial({color:0xa100ff})
+let material = new THREE.MeshStandardMaterial({
+color:0xa100ff,
+metalness:0.3,
+roughness:0.6
+})
 
 let mesh = new THREE.Mesh(geometry,material)
 
 geometry.center()
 
-mesh.position.set(x,y,z)
-
 scene.add(mesh)
 
 meshes[name]=mesh
-
-colors[name]="#a100ff"
 
 let option=document.createElement("option")
 option.value=name
@@ -84,8 +78,6 @@ document.getElementById("pieceSelect").appendChild(option)
 })
 
 }
-
-/* CHARGEMENT PIECES */
 
 function loadPiece(){
 
@@ -99,10 +91,10 @@ if(piece=="cache_allumage"){
 
 if(moteur=="e3"){
 
-addPiece("base","models/cache_e3_base.stl",0,0,0)
-addPiece("rond","models/cache_e3_rond.stl",0,0,0)
-addPiece("piece1","models/cache_e3_pieces1.stl",0,0,0)
-addPiece("piece2","models/cache_e3_pieces2.stl",0,0,0)
+addPiece("base","models/cache_e3_base.stl")
+addPiece("rond","models/cache_e3_rond.stl")
+addPiece("piece1","models/cache_e3_pieces1.stl")
+addPiece("piece2","models/cache_e3_pieces2.stl")
 
 }
 
@@ -114,15 +106,15 @@ if(piece=="cache_pignon"){
 
 if(moteur=="am6"){
 
-addPiece("base","models/pignon_am6_base.stl",0,0,0)
-addPiece("piece1","models/pignon_am6_pieces1.stl",0,0,0)
+addPiece("base","models/pignon_am6_base.stl")
+addPiece("piece1","models/pignon_am6_pieces1.stl")
 
 }
 
 if(moteur=="e3"){
 
-addPiece("base","models/pignon_e3_base.stl",0,0,0)
-addPiece("piece1","models/pignon_e3_pieces1.stl",0,0,0)
+addPiece("base","models/pignon_e3_base.stl")
+addPiece("piece1","models/pignon_e3_pieces1.stl")
 
 }
 
@@ -189,7 +181,7 @@ addPiece("biellette","models/biellette.stl")
 
 }
 
-/* COULEUR PAR PIECE */
+/* COULEUR */
 
 function setColor(color){
 
@@ -199,35 +191,9 @@ if(meshes[selected]){
 
 meshes[selected].material.color.set(color)
 
-colors[selected]=color
-
 }
 
 }
-
-/* AJOUT PANIER AVEC COULEURS */
-
-function addToCart(){
-
-let moteur=document.getElementById("moteur").value
-
-let config = {
-piece: piece,
-moteur: moteur,
-colors: colors
-}
-
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-cart.push(config)
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-alert("Produit ajouté au panier")
-
-}
-
-/* RENDER */
 
 function animate(){
 
