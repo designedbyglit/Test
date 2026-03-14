@@ -4,9 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Produit</title>
+<title>Personnaliser</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,63 +14,73 @@
 
 <header>
 
-<div class="menu-gauche">
-
 <a href="index.html">Accueil</a>
-<a href="#">Produits</a>
-<a href="#">Panier</a>
-
-</div>
 
 <div class="logo">
-
-<a href="index.html">
-<img src="logo.png">
-</a>
-
+<img src="images/logo.png">
 </div>
 
-<div class="menu-droite">
-
-<a href="#">S'inscrire / Connexion</a>
-
-</div>
+<a href="panier.html">Panier</a>
 
 </header>
 
+<section class="products">
 
-<section class="page-produit">
+<h1>Personnalisation</h1>
 
-<div class="produit-container">
+<br>
 
-<div class="image-produit">
+<div style="max-width:500px;margin:auto">
 
-<img src="images/p1.jpg">
+<img id="preview" src="images/cache_allumage.jpg" style="width:100%;border-radius:20px">
 
-</div>
+<br><br>
 
+<label>Couleur :</label>
 
-<div class="info-produit">
+<input type="color" id="colorPicker" value="#a100ff">
 
-<h1>Cache allumage</h1>
+<br><br>
 
-<p class="prix">49€</p>
-
-<p>
-
-Cache allumage imprimé en 3D haute qualité.
-Compatible AM6 et Derbi €3.
-
-</p>
-
-<button class="cta">Commander</button>
-
-</div>
+<button onclick="addToCart()">Ajouter au panier</button>
 
 </div>
 
 </section>
 
+<script>
+
+const preview = document.getElementById("preview")
+const colorPicker = document.getElementById("colorPicker")
+
+colorPicker.addEventListener("input",()=>{
+
+preview.style.filter="drop-shadow(0 0 20px "+colorPicker.value+")"
+
+})
+
+
+function addToCart(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+cart.push({
+
+name:"Pièce personnalisée",
+price:30,
+color:colorPicker.value,
+qty:1
+
+})
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+alert("Produit ajouté au panier")
+
+}
+
+</script>
 
 </body>
+
 </html>
