@@ -14,7 +14,6 @@ background:#111;
 #viewer{
 width:100%;
 height:100vh;
-display:block;
 }
 
 button{
@@ -46,10 +45,8 @@ const camera = new THREE.PerspectiveCamera(
 75,
 window.innerWidth/window.innerHeight,
 0.1,
-1000
+10000
 )
-
-camera.position.set(0,80,150)
 
 const renderer = new THREE.WebGLRenderer({antialias:true})
 renderer.setSize(window.innerWidth,window.innerHeight)
@@ -71,8 +68,25 @@ const loader = new THREE.GLTFLoader()
 loader.load("models/yes.glb", function(gltf){
 
 model = gltf.scene
-
 scene.add(model)
+
+/* CENTRER LA PIECE */
+
+const box = new THREE.Box3().setFromObject(model)
+const center = box.getCenter(new THREE.Vector3())
+const size = box.getSize(new THREE.Vector3())
+
+model.position.sub(center)
+
+/* POSITION CAMERA */
+
+const maxDim = Math.max(size.x, size.y, size.z)
+const distance = maxDim * 2
+
+camera.position.set(distance, distance, distance)
+
+controls.target.set(0,0,0)
+controls.update()
 
 })
 
