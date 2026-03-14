@@ -59,11 +59,16 @@ roughness:0.6
 
 let mesh = new THREE.Mesh(geometry,material)
 
-/* IMPORTANT : PAS DE geometry.center() */
-
 scene.add(mesh)
 
 meshes[name]=mesh
+
+/* centre automatiquement la caméra */
+
+let box = new THREE.Box3().setFromObject(mesh)
+let center = box.getCenter(new THREE.Vector3())
+
+controls.target.copy(center)
 
 let option=document.createElement("option")
 option.value=name
