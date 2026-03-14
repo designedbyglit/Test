@@ -51,7 +51,7 @@ document.getElementById("pieceSelect").innerHTML=""
 
 }
 
-function addPiece(name,path){
+function addPiece(name,path,x=0,y=0,z=0,rx=0,ry=0,rz=0){
 
 loader.load(path,function(geometry){
 
@@ -64,6 +64,9 @@ roughness:0.6
 let mesh = new THREE.Mesh(geometry,material)
 
 geometry.center()
+
+mesh.position.set(x,y,z)
+mesh.rotation.set(rx,ry,rz)
 
 scene.add(mesh)
 
@@ -91,10 +94,13 @@ if(piece=="cache_allumage"){
 
 if(moteur=="e3"){
 
-addPiece("base","models/cache_e3_base.stl")
-addPiece("rond","models/cache_e3_rond.stl")
-addPiece("piece1","models/cache_e3_pieces1.stl")
-addPiece("piece2","models/cache_e3_pieces2.stl")
+addPiece("base","models/cache_e3_base.stl",0,0,0)
+
+addPiece("rond","models/cache_e3_rond.stl",0,5,0)
+
+addPiece("piece1","models/cache_e3_pieces1.stl",0,0,3)
+
+addPiece("piece2","models/cache_e3_pieces2.stl",0,0,-3)
 
 }
 
@@ -113,8 +119,9 @@ addPiece("piece1","models/pignon_am6_pieces1.stl")
 
 if(moteur=="e3"){
 
-addPiece("base","models/pignon_e3_base.stl")
-addPiece("piece1","models/pignon_e3_pieces1.stl")
+addPiece("base","models/pignon_e3_base.stl",0,0,0)
+
+addPiece("piece1","models/pignon_e3_pieces1.stl",0,3,2)
 
 }
 
@@ -142,8 +149,9 @@ addPiece("bouchon","models/recup_am6_bouchon.stl")
 
 if(moteur=="e3"){
 
-addPiece("base","models/recup_e3_base.stl")
-addPiece("bouchon","models/recup_e3_bouchon.stl")
+addPiece("base","models/recup_e3_base.stl",0,0,0)
+
+addPiece("bouchon","models/recup_e3_bouchon.stl",0,15,0)
 
 }
 
