@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Configurateur 3D</title>
+<title>Configurateur</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,19 +18,13 @@
 
 <header>
 
-<div class="nav-left">
 <a href="index.html">Accueil</a>
-<a href="#">Produits</a>
-<a href="#">Panier</a>
-</div>
 
 <div class="logo">
 <img src="images/logo.png">
 </div>
 
-<div class="nav-right">
-<a href="#">Compte</a>
-</div>
+<a href="panier.html">Panier 🛒</a>
 
 </header>
 
@@ -43,7 +37,6 @@
 
 <br>
 
-<label>Couleur :</label>
 <input type="color" id="colorPicker" value="#a100ff">
 
 <br><br>
@@ -71,7 +64,7 @@ const light1 = new THREE.PointLight(0xffffff,1)
 light1.position.set(5,5,5)
 scene.add(light1)
 
-const light2 = new THREE.AmbientLight(0xffffff,0.6)
+const light2 = new THREE.AmbientLight(0xffffff,0.5)
 scene.add(light2)
 
 let piece
@@ -85,9 +78,7 @@ loader.load(
 function(geometry){
 
 const material = new THREE.MeshStandardMaterial({
-color:0xa100ff,
-metalness:0.3,
-roughness:0.4
+color:0xa100ff
 })
 
 piece = new THREE.Mesh(geometry,material)
@@ -107,7 +98,9 @@ function animate(){
 requestAnimationFrame(animate)
 
 if(piece){
+
 piece.rotation.y += 0.01
+
 }
 
 renderer.render(scene,camera)
@@ -115,7 +108,6 @@ renderer.render(scene,camera)
 }
 
 animate()
-
 
 document.getElementById("colorPicker").addEventListener("input",function(){
 
@@ -133,13 +125,15 @@ function addToCart(){
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 cart.push({
+
 name:"Piece Semi Perso",
 price:30
+
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-alert("Produit ajouté au panier")
+alert("Ajouté au panier")
 
 }
 
