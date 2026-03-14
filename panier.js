@@ -2,58 +2,35 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 function addToCart(name, price){
 
-cart.push({name,price})
+cart.push({
+name:name,
+price:price
+})
 
-localStorage.setItem("cart",JSON.stringify(cart))
+localStorage.setItem("cart", JSON.stringify(cart))
 
 updateCartCount()
-
-alert("Produit ajouté au panier")
 
 }
 
 function updateCartCount(){
 
-const count = cart.length
+const count = document.getElementById("cart-count")
 
-const el = document.getElementById("cart-count")
-
-if(el){
-el.innerText = count
+if(count){
+count.innerText = cart.length
 }
 
 }
 
-function loadCart(){
+function clearCart(){
 
-const container = document.getElementById("cart-items")
+localStorage.removeItem("cart")
 
-if(!container) return
-
-container.innerHTML = ""
-
-let total = 0
-
-cart.forEach(item => {
-
-const div = document.createElement("div")
-
-div.className = "cart-item"
-
-div.innerHTML = `
-<span>${item.name}</span>
-<span>${item.price}€</span>
-`
-
-container.appendChild(div)
-
-total += item.price
-
-})
-
-document.getElementById("total").innerText = total + "€"
-
-}
+cart = []
 
 updateCartCount()
-loadCart()
+
+}
+
+window.onload = updateCartCount
