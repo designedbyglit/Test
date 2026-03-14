@@ -23,7 +23,7 @@ header{
 display:flex;
 justify-content:space-between;
 padding:20px;
-background:#000;
+background:black;
 }
 
 header a{
@@ -38,27 +38,33 @@ margin:auto;
 }
 
 button{
+
 background:#a100ff;
 border:none;
 padding:10px 20px;
 color:white;
 margin:5px;
 cursor:pointer;
+
 }
 
 .colors{
+
 display:flex;
 justify-content:center;
 gap:10px;
 margin-top:20px;
+
 }
 
 .color{
+
 width:30px;
 height:30px;
 border-radius:50%;
 cursor:pointer;
 border:2px solid white;
+
 }
 
 </style>
@@ -88,6 +94,10 @@ border:2px solid white;
 
 <div id="viewer"></div>
 
+<h3 style="text-align:center">Choisir la pièce</h3>
+
+<div style="text-align:center" id="parts"></div>
+
 <h3 style="text-align:center">Couleur</h3>
 
 <div class="colors">
@@ -105,10 +115,15 @@ border:2px solid white;
 
 <script>
 
+/* récupérer produit */
+
 const params = new URLSearchParams(window.location.search)
 const product = params.get("piece")
 
 document.getElementById("title").innerText = product
+
+
+/* correspondance STL */
 
 const pieces={
 
@@ -145,18 +160,21 @@ light.position.set(0,0,10)
 
 scene.add(light)
 
-let material=new THREE.MeshStandardMaterial({color:0xa100ff})
-
 let loader=new THREE.STLLoader()
 
 let meshes=[]
+let materials=[]
+let selectedPart=0
 
 function clearScene(){
 
 meshes.forEach(m=>scene.remove(m))
 meshes=[]
+materials=[]
 
 }
+
+/* charger STL */
 
 function loadMotor(type){
 
@@ -165,21 +183,45 @@ clearScene()
 if(!pieces[product])return
 if(!pieces[product][type])return
 
-pieces[product][type].forEach(file=>{
+let partsDiv=document.getElementById("parts")
+
+partsDiv.innerHTML=""
+
+pieces[product][type].forEach((file,i)=>{
 
 loader.load(file,function(geometry){
 
-let mesh=new THREE.Mesh(geometry,material)
+let mat=new THREE.MeshStandardMaterial({
+color:0xa100ff,
+side:THREE.DoubleSide
+})
+
+let mesh=new THREE.Mesh(geometry,mat)
 
 geometry.center()
 
 scene.add(mesh)
 
 meshes.push(mesh)
+materials.push(mat)
 
 })
 
+let btn=document.createElement("button")
+
+btn.innerText="Piece "+(i+1)
+
+btn.onclick=()=>selectPart(i)
+
+partsDiv.appendChild(btn)
+
 })
+
+}
+
+function selectPart(i){
+
+selectedPart=i
 
 }
 
@@ -199,7 +241,11 @@ animate()
 
 function setColor(c){
 
-material.color.set(c)
+if(materials[selectedPart]){
+
+materials[selectedPart].color.set(c)
+
+}
 
 }
 
