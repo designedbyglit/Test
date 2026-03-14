@@ -13,6 +13,7 @@ margin:0;
 background:#0a0a0a;
 color:white;
 font-family:Arial;
+overflow-x:hidden;
 }
 
 /* HEADER */
@@ -43,6 +44,16 @@ font-weight:bold;
 
 }
 
+/* TITRE */
+
+.hero{
+
+text-align:center;
+margin-top:40px;
+font-size:32px;
+
+}
+
 /* PRODUITS */
 
 .products{
@@ -54,13 +65,15 @@ padding:60px;
 
 }
 
+/* CARTES */
+
 .card{
 
 background:#111;
 border-radius:20px;
 overflow:hidden;
-cursor:pointer;
 text-align:center;
+cursor:pointer;
 transition:0.3s;
 animation:float 4s ease-in-out infinite;
 
@@ -76,16 +89,18 @@ object-fit:cover;
 
 .card h3{
 
-padding:10px;
+padding:15px;
 
 }
 
 .card:hover{
 
-transform:scale(1.07);
+transform:scale(1.08);
 box-shadow:0 0 25px #a100ff;
 
 }
+
+/* FLOTTEMENT */
 
 @keyframes float{
 
@@ -111,36 +126,50 @@ box-shadow:0 0 25px #a100ff;
 
 </header>
 
+<div class="hero">
+Personnalise tes pièces moto 3D
+</div>
+
 <section class="products">
 
-<a class="card" href="produit.html?piece=recuperateur">
-<img src="images/recuperateur.png">
-<h3>Récupérateur de fluides</h3>
+<a class="card" href="semi-perso.html">
+<img src="images/semiperso.png">
+<h3>Semi Perso</h3>
 </a>
 
-<a class="card" href="produit.html?piece=support_durite">
-<img src="images/support.png">
-<h3>Support durite</h3>
+<a class="card" href="fullperso.html">
+<img src="images/fullperso.png">
+<h3>Full Perso</h3>
 </a>
 
-<a class="card" href="produit.html?piece=cache_pignon">
-<img src="images/pignon.png">
-<h3>Cache pignon</h3>
-</a>
-
-<a class="card" href="produit.html?piece=cache_allumage">
+<a class="card" href="configurateur.html?piece=cache_allumage">
 <img src="images/allumage.png">
-<h3>Cache allumage</h3>
+<h3>Cache Allumage</h3>
 </a>
 
-<a class="card" href="produit.html?piece=obturateur">
+<a class="card" href="configurateur.html?piece=cache_pignon">
+<img src="images/pignon.png">
+<h3>Cache Pignon</h3>
+</a>
+
+<a class="card" href="configurateur.html?piece=support_durite">
+<img src="images/support.png">
+<h3>Support Durite</h3>
+</a>
+
+<a class="card" href="configurateur.html?piece=recuperateur">
+<img src="images/recuperateur.png">
+<h3>Récupérateur Fluides</h3>
+</a>
+
+<a class="card" href="configurateur.html?piece=obturateur">
 <img src="images/obturateur.png">
-<h3>Cache obturateur</h3>
+<h3>Cache Obturateur</h3>
 </a>
 
-<a class="card" href="produit.html?piece=biellette">
+<a class="card" href="configurateur.html?piece=biellette">
 <img src="images/biellette.png">
-<h3>Butée biellette</h3>
+<h3>Butée Biellette</h3>
 </a>
 
 </section>
