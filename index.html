@@ -4,35 +4,75 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Configurateur pièce</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+<title>DesignedByGlit</title>
 
 <style>
 
-#viewer{
-width:500px;
-height:500px;
-margin:auto;
+body{
+margin:0;
+background:#0a0a0a;
+font-family:Arial;
+color:white;
 }
 
-.colors{
+/* HEADER */
+
+header{
 display:flex;
-gap:10px;
-justify-content:center;
-margin-top:20px;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#000;
 }
 
-.color{
-width:30px;
-height:30px;
-border-radius:50%;
+header a{
+color:white;
+text-decoration:none;
+font-size:18px;
+}
+
+.logo{
+font-size:24px;
+color:#a100ff;
+font-weight:bold;
+}
+
+/* PRODUITS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+padding:40px;
+}
+
+.card{
+
+background:#111;
+border-radius:20px;
+overflow:hidden;
+text-align:center;
+transition:0.3s;
 cursor:pointer;
-border:2px solid white;
+box-shadow:0 0 10px #a100ff44;
+
+}
+
+.card:hover{
+
+transform:scale(1.05);
+box-shadow:0 0 25px #a100ff;
+
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.card h3{
+padding:10px;
 }
 
 </style>
@@ -41,205 +81,49 @@ border:2px solid white;
 
 <body>
 
-<h1 id="title" style="text-align:center"></h1>
+<header>
 
-<div style="text-align:center">
+<a href="index.html">Accueil</a>
 
-<button onclick="loadMotor('am6')">AM6</button>
-<button onclick="loadMotor('e3')">E3</button>
+<div class="logo">DesignedByGlit</div>
 
-</div>
+<a href="panier.html">Panier</a>
 
-<br>
+</header>
 
-<div id="viewer"></div>
+<section class="products">
 
-<h3 style="text-align:center">Couleur</h3>
+<a class="card" href="produit.html?piece=recuperateur">
+<img src="images/recuperateur.png">
+<h3>Récupérateur de fluides</h3>
+</a>
 
-<div class="colors">
+<a class="card" href="produit.html?piece=support_durite">
+<img src="images/support.png">
+<h3>Support durite</h3>
+</a>
 
-<div class="color" style="background:black" onclick="setColor('#111')"></div>
-<div class="color" style="background:red" onclick="setColor('#ff0000')"></div>
-<div class="color" style="background:blue" onclick="setColor('#0066ff')"></div>
-<div class="color" style="background:purple" onclick="setColor('#a100ff')"></div>
+<a class="card" href="produit.html?piece=cache_pignon">
+<img src="images/pignon.png">
+<h3>Cache pignon</h3>
+</a>
 
-</div>
+<a class="card" href="produit.html?piece=cache_allumage">
+<img src="images/allumage.png">
+<h3>Cache allumage</h3>
+</a>
 
-<br>
+<a class="card" href="produit.html?piece=obturateur">
+<img src="images/obturateur.png">
+<h3>Cache obturateur</h3>
+</a>
 
-<div style="text-align:center">
+<a class="card" href="produit.html?piece=biellette">
+<img src="images/biellette.png">
+<h3>Butée biellette</h3>
+</a>
 
-<button onclick="addToCart()">Ajouter au panier</button>
-
-</div>
-
-<script>
-
-/* récupérer pièce */
-
-const params = new URLSearchParams(window.location.search)
-const product = params.get("piece")
-
-document.getElementById("title").innerText = product
-
-
-/* fichiers STL */
-
-const pieces = {
-
-recuperateur:{
-
-e3:[
-"models/recup_e3_base.stl",
-"models/recup_e3_bouchon.stl"
-],
-
-am6:[
-"models/recup_am6_base.stl",
-"models/recup_am6_bouchon.stl"
-]
-
-},
-
-support_durite:{
-
-e3:["models/support_e3.stl"],
-am6:["models/support_am6.stl"]
-
-},
-
-cache_pignon:{
-
-e3:[
-"models/pignon_e3_base.stl",
-"models/pignon_e3_pieces1.stl"
-],
-
-am6:[
-"models/pignon_am6_base.stl",
-"models/pignon_am6_pieces1.stl"
-]
-
-}
-
-}
-
-
-/* THREE JS */
-
-let scene = new THREE.Scene()
-
-let camera = new THREE.PerspectiveCamera(75,1,0.1,1000)
-
-let renderer = new THREE.WebGLRenderer({alpha:true})
-
-renderer.setSize(500,500)
-
-document.getElementById("viewer").appendChild(renderer.domElement)
-
-let light = new THREE.DirectionalLight(0xffffff,1)
-
-light.position.set(0,0,10)
-
-scene.add(light)
-
-let material = new THREE.MeshStandardMaterial({
-color:0xa100ff,
-metalness:0.6,
-roughness:0.3
-})
-
-let loader = new THREE.STLLoader()
-
-let meshes=[]
-
-function clearScene(){
-
-meshes.forEach(m=>scene.remove(m))
-meshes=[]
-
-}
-
-
-/* charger moteur */
-
-function loadMotor(type){
-
-clearScene()
-
-if(!pieces[product]) return
-
-if(!pieces[product][type]) return
-
-pieces[product][type].forEach(file=>{
-
-loader.load(file,function(geometry){
-
-let mesh = new THREE.Mesh(geometry,material)
-
-geometry.center()
-
-scene.add(mesh)
-
-meshes.push(mesh)
-
-})
-
-})
-
-}
-
-
-camera.position.z = 120
-
-let controls = new THREE.OrbitControls(camera,renderer.domElement)
-
-
-function animate(){
-
-requestAnimationFrame(animate)
-
-renderer.render(scene,camera)
-
-}
-
-animate()
-
-
-/* couleur */
-
-function setColor(color){
-
-material.color.set(color)
-
-}
-
-
-/* panier */
-
-function addToCart(){
-
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-cart.push({
-
-name:product,
-color:material.color.getHexString()
-
-})
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-alert("Ajouté au panier")
-
-}
-
-
-/* charger AM6 au début */
-
-loadMotor("am6")
-
-</script>
+</section>
 
 </body>
 </html>
