@@ -37,14 +37,13 @@
 
 <section style="padding:100px;text-align:center">
 
-<h1>Configurateur 3D</h1>
+<h1>Configurateur Semi Perso</h1>
 
 <div id="viewer" style="width:800px;height:500px;margin:auto"></div>
 
 <br>
 
 <label>Couleur :</label>
-
 <input type="color" id="colorPicker" value="#a100ff">
 
 <br><br>
@@ -58,12 +57,7 @@
 
 const scene = new THREE.Scene()
 
-const camera = new THREE.PerspectiveCamera(
-75,
-800/500,
-0.1,
-1000
-)
+const camera = new THREE.PerspectiveCamera(75,800/500,0.1,1000)
 
 const renderer = new THREE.WebGLRenderer({antialias:true})
 
@@ -73,17 +67,12 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 const controls = new THREE.OrbitControls(camera,renderer.domElement)
 
-
 const light1 = new THREE.PointLight(0xffffff,1)
-
 light1.position.set(5,5,5)
-
 scene.add(light1)
 
 const light2 = new THREE.AmbientLight(0xffffff,0.6)
-
 scene.add(light2)
-
 
 let piece
 
@@ -91,18 +80,14 @@ const loader = new THREE.STLLoader()
 
 loader.load(
 
-"models/piece_corps.STL",
+"models/piece.stl",
 
 function(geometry){
 
 const material = new THREE.MeshStandardMaterial({
-
 color:0xa100ff,
-
 metalness:0.3,
-
 roughness:0.4
-
 })
 
 piece = new THREE.Mesh(geometry,material)
@@ -115,18 +100,14 @@ scene.add(piece)
 
 )
 
-
 camera.position.z = 120
-
 
 function animate(){
 
 requestAnimationFrame(animate)
 
 if(piece){
-
 piece.rotation.y += 0.01
-
 }
 
 renderer.render(scene,camera)
@@ -135,8 +116,6 @@ renderer.render(scene,camera)
 
 animate()
 
-
-/* CHANGER COULEUR */
 
 document.getElementById("colorPicker").addEventListener("input",function(){
 
@@ -149,18 +128,13 @@ piece.material.color.set(this.value)
 })
 
 
-/* AJOUT PANIER */
-
 function addToCart(){
 
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 cart.push({
-
-name:"Pièce personnalisée",
-
+name:"Piece Semi Perso",
 price:30
-
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
