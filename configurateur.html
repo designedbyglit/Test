@@ -6,11 +6,45 @@
 <meta charset="UTF-8">
 <title>Configurateur</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+body{
+margin:0;
+background:#0a0a0a;
+color:white;
+font-family:Arial;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+padding:20px;
+background:black;
+}
+
+#viewer{
+width:100%;
+height:500px;
+}
+
+.controls{
+text-align:center;
+padding:20px;
+}
+
+button{
+
+background:#a100ff;
+border:none;
+padding:10px 20px;
+margin:5px;
+color:white;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+</style>
 
 </head>
 
@@ -20,87 +54,104 @@
 
 <a href="index.html">Accueil</a>
 
-<div class="logo">
-<img src="images/logo.png">
-</div>
+<div>Configurateur</div>
 
-<a href="panier.html">Panier 🛒</a>
+<a href="panier.html">Panier</a>
 
 </header>
 
+<div id="viewer"></div>
 
-<section style="padding:100px;text-align:center">
+<div class="controls">
 
-<h1>Configurateur Semi Perso</h1>
+<button onclick="setColor('#ff0000')">Rouge</button>
+<button onclick="setColor('#00ff00')">Vert</button>
+<button onclick="setColor('#0000ff')">Bleu</button>
+<button onclick="setColor('#ffffff')">Blanc</button>
+<button onclick="setColor('#000000')">Noir</button>
 
-<div id="viewer" style="width:800px;height:500px;margin:auto"></div>
+</div>
 
-<br>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<input type="color" id="colorPicker" value="#a100ff">
-
-<br><br>
-
-<button onclick="addToCart()">Ajouter au panier</button>
-
-</section>
-
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
 
 <script>
 
-const scene = new THREE.Scene()
+const params = new URLSearchParams(window.location.search)
+const piece = params.get("piece")
 
-const camera = new THREE.PerspectiveCamera(75,800/500,0.1,1000)
+let stl = ""
 
-const renderer = new THREE.WebGLRenderer({antialias:true})
+if(piece=="recuperateur"){
+stl="models/recup_am6_base.stl"
+}
 
-renderer.setSize(800,500)
+if(piece=="support_durite"){
+stl="models/support_am6.stl"
+}
+
+if(piece=="cache_pignon"){
+stl="models/pignon_am6_base.stl"
+}
+
+if(piece=="cache_allumage"){
+stl="models/cache_am6_base.stl"
+}
+
+if(piece=="obturateur"){
+stl="models/obturateur_am6_base.stl"
+}
+
+if(piece=="biellette"){
+stl="models/biellette.stl"
+}
+
+let scene = new THREE.Scene()
+
+let camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/500,
+0.1,
+1000
+)
+
+let renderer = new THREE.WebGLRenderer({antialias:true})
+
+renderer.setSize(window.innerWidth,500)
 
 document.getElementById("viewer").appendChild(renderer.domElement)
 
-const controls = new THREE.OrbitControls(camera,renderer.domElement)
+camera.position.z=100
 
-const light1 = new THREE.PointLight(0xffffff,1)
-light1.position.set(5,5,5)
-scene.add(light1)
+let light = new THREE.DirectionalLight(0xffffff,1)
 
-const light2 = new THREE.AmbientLight(0xffffff,0.5)
-scene.add(light2)
+light.position.set(0,1,1)
 
-let piece
+scene.add(light)
 
-const loader = new THREE.STLLoader()
+let mesh
 
-loader.load(
+let loader = new THREE.STLLoader()
 
-"models/piece.stl",
+loader.load(stl,function(geometry){
 
-function(geometry){
+let material = new THREE.MeshStandardMaterial({color:0xa100ff})
 
-const material = new THREE.MeshStandardMaterial({
-color:0xa100ff
-})
-
-piece = new THREE.Mesh(geometry,material)
+mesh = new THREE.Mesh(geometry,material)
 
 geometry.center()
 
-scene.add(piece)
+scene.add(mesh)
 
-}
-
-)
-
-camera.position.z = 120
+})
 
 function animate(){
 
 requestAnimationFrame(animate)
 
-if(piece){
-
-piece.rotation.y += 0.01
-
+if(mesh){
+mesh.rotation.y +=0.01
 }
 
 renderer.render(scene,camera)
@@ -109,31 +160,9 @@ renderer.render(scene,camera)
 
 animate()
 
-document.getElementById("colorPicker").addEventListener("input",function(){
+function setColor(color){
 
-if(piece){
-
-piece.material.color.set(this.value)
-
-}
-
-})
-
-
-function addToCart(){
-
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-cart.push({
-
-name:"Piece Semi Perso",
-price:30
-
-})
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-alert("Ajouté au panier")
+mesh.material.color.set(color)
 
 }
 
