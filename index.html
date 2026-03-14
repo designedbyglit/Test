@@ -141,12 +141,13 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 cart.push({
 name:name,
-price:price
+price:price,
+qty:1
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
 
-alert(name + " ajouté au panier")
+alert(name+" ajouté au panier")
 
 document.getElementById("cartCount").innerText = cart.length
 
