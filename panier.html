@@ -1,103 +1,51 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
 
 <meta charset="UTF-8">
 <title>Panier</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+body{
+background:#0a0a0a;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+a{
+color:#a100ff;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<header>
+<a href="index.html">← Retour accueil</a>
 
-<a href="index.html">Accueil</a>
-
-<div class="logo">
-<img src="images/logo.png">
-</div>
-
-<a href="panier.html">Panier</a>
-
-</header>
-
-
-<section class="products">
-
-<h1>Ton Panier</h1>
+<h1>Panier</h1>
 
 <div id="cart"></div>
 
-<br>
-
-<h2 id="total"></h2>
-
-</section>
-
-
 <script>
 
-let cart = JSON.parse(localStorage.getItem("cart")) || []
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
 
-function renderCart(){
+let div=document.getElementById("cart")
 
-let container = document.getElementById("cart")
+cart.forEach(item=>{
 
-container.innerHTML = ""
+let p=document.createElement("p")
 
-let total = 0
+p.innerText=item.name
 
-cart.forEach((item,index)=>{
-
-total += item.price * (item.qty || 1)
-
-container.innerHTML += `
-
-<div class="product-card">
-
-<h3>${item.name}</h3>
-
-<p>${item.price}€</p>
-
-<input type="number" min="1" value="${item.qty || 1}" onchange="updateQty(${index},this.value)">
-
-<button onclick="removeItem(${index})">Supprimer</button>
-
-</div>
-
-`
+div.appendChild(p)
 
 })
-
-document.getElementById("total").innerText = "Total : "+total+"€"
-
-}
-
-
-function updateQty(index,qty){
-
-cart[index].qty = parseInt(qty)
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-renderCart()
-
-}
-
-function removeItem(index){
-
-cart.splice(index,1)
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-renderCart()
-
-}
-
-renderCart()
 
 </script>
 
