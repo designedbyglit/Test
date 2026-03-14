@@ -8,6 +8,12 @@
 
 <link rel="stylesheet" href="style.css">
 
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 </head>
 
 <body>
@@ -35,42 +41,35 @@
 
 <h1>Demande de pièce Full Perso</h1>
 
-<form style="max-width:500px;margin:auto;text-align:left">
+<form id="customForm" style="max-width:500px;margin:auto;text-align:left">
 
 <label>Nom</label>
-<input type="text" required>
+<input type="text" id="name" required>
 
 <br><br>
 
 <label>Email</label>
-<input type="email" required>
+<input type="email" id="email" required>
 
 <br><br>
 
 <label>Nom de la pièce</label>
-<input type="text" required>
+<input type="text" id="piece" required>
 
 <br><br>
 
 <label>Moto / modèle</label>
-<input type="text">
+<input type="text" id="moto">
 
 <br><br>
 
 <label>Couleur souhaitée</label>
-<input type="text">
+<input type="text" id="color">
 
 <br><br>
 
-<label>Description de la pièce</label>
-
-<textarea rows="5"></textarea>
-
-<br><br>
-
-<label>Image ou fichier (optionnel)</label>
-
-<input type="file">
+<label>Description</label>
+<textarea id="description"></textarea>
 
 <br><br>
 
@@ -79,6 +78,77 @@
 </form>
 
 </section>
+
+
+<script>
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB8zyAwlTAkOcFi9IU3VOkKb0HaxNwCQ4E",
+  authDomain: "designedbyglit.firebaseapp.com",
+  projectId: "designedbyglit",
+  storageBucket: "designedbyglit.firebasestorage.app",
+  messagingSenderId: "694213083753",
+  appId: "1:694213083753:web:691f3b62975c2a3db318f8"
+};
+
+firebase.initializeApp(firebaseConfig)
+
+const db = firebase.firestore()
+
+/* EMAILJS */
+
+emailjs.init("YOUR_PUBLIC_KEY")
+
+/* FORMULAIRE */
+
+document.getElementById("customForm").addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const name = document.getElementById("name").value
+const email = document.getElementById("email").value
+const piece = document.getElementById("piece").value
+const moto = document.getElementById("moto").value
+const color = document.getElementById("color").value
+const description = document.getElementById("description").value
+
+
+/* FIREBASE SAVE */
+
+await db.collection("customOrders").add({
+
+name,
+email,
+piece,
+moto,
+color,
+description,
+date: new Date()
+
+})
+
+
+/* EMAIL */
+
+emailjs.send("YOUR_SERVICE","YOUR_TEMPLATE",{
+
+name:name,
+email:email,
+piece:piece,
+moto:moto,
+color:color,
+description:description
+
+})
+
+
+alert("Demande envoyée !")
+
+})
+
+</script>
 
 </body>
 </html>
