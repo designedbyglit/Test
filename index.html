@@ -19,56 +19,45 @@ overflow-x:hidden;
 /* HEADER */
 
 header{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px;
 background:black;
-
 }
 
 header a{
-
 color:white;
 text-decoration:none;
 font-size:18px;
-
 }
 
 .logo{
-
 font-size:24px;
 color:#a100ff;
 font-weight:bold;
-
 }
 
 /* TITRE */
 
 .hero{
-
 text-align:center;
 margin-top:40px;
 font-size:32px;
-
 }
 
 /* PRODUITS */
 
 .products{
-
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:40px;
 padding:60px;
-
 }
 
 /* CARTES */
 
 .card{
-
 background:#111;
 border-radius:20px;
 overflow:hidden;
@@ -76,38 +65,29 @@ text-align:center;
 cursor:pointer;
 transition:0.3s;
 animation:float 4s ease-in-out infinite;
-
 }
 
 .card img{
-
 width:100%;
 height:220px;
 object-fit:cover;
-
 }
 
 .card h3{
-
 padding:15px;
-
 }
 
 .card:hover{
-
 transform:scale(1.08);
 box-shadow:0 0 25px #a100ff;
-
 }
 
 /* FLOTTEMENT */
 
 @keyframes float{
-
 0%{transform:translateY(0)}
 50%{transform:translateY(-10px)}
 100%{transform:translateY(0)}
-
 }
 
 </style>
@@ -170,6 +150,16 @@ Personnalise tes pièces moto 3D
 <a class="card" href="configurateur.html?piece=biellette">
 <img src="images/biellette.png">
 <h3>Butée Biellette</h3>
+</a>
+
+<a class="card" href="configurateur.html?piece=pipe">
+<img src="images/pipe.png">
+<h3>Pipe Performance</h3>
+</a>
+
+<a class="card" href="configurateur.html?piece=radia">
+<img src="images/radia.png">
+<h3>Adaptation Radia Derbi</h3>
 </a>
 
 </section>
