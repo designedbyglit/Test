@@ -1,44 +1,20 @@
 body{
+
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(180deg,#eaf4ff,#ffffff);
-overflow-x:hidden;
-}
-
-/* NUAGES FUTURISTES */
-
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:200%;
-height:100%;
-background:url("https://www.transparenttextures.com/patterns/clouds.png");
-opacity:0.2;
-animation:cloudmove 80s linear infinite;
-z-index:-1;
-}
-
-@keyframes cloudmove{
-
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+font-family:Arial;
+background:#f5f5f5;
 
 }
 
-/* HEADER */
 
 header{
 
 position:fixed;
 top:0;
 width:100%;
-height:85px;
+height:70px;
 
-background:rgba(255,255,255,0.85);
-
-backdrop-filter:blur(10px);
+background:white;
 
 display:flex;
 align-items:center;
@@ -46,294 +22,115 @@ justify-content:space-between;
 
 padding:0 40px;
 
-box-shadow:0 5px 25px rgba(0,0,0,0.1);
-
-z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 
 }
 
-/* MENU */
 
-.nav-left a,
-.nav-right a{
-
-margin-right:20px;
-text-decoration:none;
-font-weight:bold;
-color:#222;
-transition:0.3s;
-
-}
-
-.nav-left a:hover,
-.nav-right a:hover{
-
-color:#008cff;
-
-}
-
-/* LOGO */
-
-.logo img{
-
-height:55px;
-transition:0.3s;
-
-}
-
-.logo img:hover{
-
-transform:scale(1.1);
-
-}
-
-/* PANIER COUNT */
-
-.cart-icon{
-
-position:relative;
-font-weight:bold;
-
-}
-
-#cart-count{
-
-background:#ff3b3b;
-color:white;
-
-border-radius:50%;
-
-padding:3px 8px;
-
-font-size:12px;
-
-position:absolute;
-
-top:-8px;
-right:-12px;
-
-}
-
-/* HERO */
-
-.hero-moto{
-
-margin-top:85px;
-height:75vh;
-
-background-size:cover;
-background-position:center;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-text-align:center;
-color:white;
-
-}
-
-.hero-moto h1{
-
-font-size:60px;
-
-background:rgba(0,0,0,0.55);
-
-padding:25px 50px;
-
-border-radius:12px;
-
-}
-
-/* CHOIX */
-
-.choix{
-
-display:grid;
-grid-template-columns:1fr 1fr;
-
-}
-
-.choix-card{
-
-position:relative;
-height:340px;
-
-overflow:hidden;
-
-cursor:pointer;
-
-}
-
-.choix-card img{
-
-width:100%;
-height:100%;
-object-fit:cover;
-
-transition:0.5s;
-
-}
-
-.choix-card:hover img{
-
-transform:scale(1.12);
-
-}
-
-.choix-text{
-
-position:absolute;
-
-bottom:30px;
-left:30px;
-
-font-size:32px;
-
-font-weight:bold;
-
-background:rgba(0,0,0,0.6);
-
-color:white;
-
-padding:12px 25px;
-
-border-radius:8px;
-
-}
-
-/* PRODUITS */
-
-.produits{
-
-padding:100px 60px;
-
-}
-
-.produits h2{
-
-text-align:center;
-font-size:42px;
-margin-bottom:60px;
-
-}
-
-.grid{
-
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:35px;
-
-}
-
-/* CARTE PRODUIT */
-
-.card{
-
-background:white;
-border-radius:12px;
-
-overflow:hidden;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-
-transition:0.4s;
-
-/* animation scroll */
-
-opacity:0;
-transform:translateY(40px);
-
-}
-
-.card.visible{
-
-opacity:1;
-transform:translateY(0);
-
-}
-
-/* hover */
-
-.card:hover{
-
-transform:translateY(-8px) scale(1.03);
-
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
-
-}
-
-.card img{
-
-width:100%;
-height:210px;
-
-object-fit:cover;
-
-}
-
-.card-content{
-
-padding:20px;
-
-text-align:center;
-
-}
-
-.price{
+.logo{
 
 font-size:22px;
 font-weight:bold;
 
-margin:10px 0;
+}
+
+
+.menu a{
+
+margin-right:20px;
+text-decoration:none;
+color:black;
 
 }
 
-/* BOUTON */
 
-button{
+.products{
 
-padding:12px 25px;
-
-border:none;
-
-border-radius:8px;
-
-background:linear-gradient(45deg,#008cff,#00c6ff);
-
-color:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:0.3s;
+margin-top:120px;
+text-align:center;
 
 }
 
-button:hover{
 
-transform:scale(1.08);
+.grid{
 
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+padding:40px;
 
 }
 
-/* PANIER */
 
-.cart-item{
-
-display:flex;
-justify-content:space-between;
+.product{
 
 background:white;
 
 padding:20px;
 
-margin-bottom:10px;
-
 border-radius:10px;
 
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+transition:0.3s;
+
+}
+
+
+.product:hover{
+
+transform:scale(1.05);
+
+}
+
+
+.product img{
+
+width:100%;
+
+border-radius:8px;
+
+}
+
+
+button{
+
+background:black;
+
+color:white;
+
+border:none;
+
+padding:10px 20px;
+
+margin-top:10px;
+
+cursor:pointer;
+
+border-radius:6px;
+
+}
+
+
+button:hover{
+
+background:#333;
+
+}
+
+
+.buy{
+
+background:#00b894;
+
+}
+
+
+.buy:hover{
+
+background:#019874;
 
 }
