@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
 <meta charset="UTF-8">
-<title>Viewer 3D</title>
 
 <style>
-body{
-margin:0;
-background:#111;
-overflow:hidden;
-}
-
-#viewer{
-width:100%;
-height:100vh;
-}
+body{margin:0;background:#111;}
+#viewer{width:100%;height:100vh;}
 </style>
 
 </head>
@@ -36,10 +27,8 @@ const camera = new THREE.PerspectiveCamera(
 75,
 window.innerWidth/window.innerHeight,
 0.1,
-10000
+100000
 )
-
-camera.position.set(0,0,200)
 
 const renderer = new THREE.WebGLRenderer({antialias:true})
 renderer.setSize(window.innerWidth,window.innerHeight)
@@ -48,11 +37,11 @@ document.getElementById("viewer").appendChild(renderer.domElement)
 
 const controls = new THREE.OrbitControls(camera,renderer.domElement)
 
-const light1 = new THREE.DirectionalLight(0xffffff,1)
-light1.position.set(100,100,100)
+const light = new THREE.DirectionalLight(0xffffff,1)
+light.position.set(100,100,100)
+scene.add(light)
 
-scene.add(light1)
-scene.add(new THREE.AmbientLight(0xffffff,0.7))
+scene.add(new THREE.AmbientLight(0xffffff,0.6))
 
 const loader = new THREE.GLTFLoader()
 
@@ -62,7 +51,29 @@ const model = gltf.scene
 
 scene.add(model)
 
-console.log("MODELE CHARGE")
+/* CENTRER MODELE */
+
+const box = new THREE.Box3().setFromObject(model)
+const size = box.getSize(new THREE.Vector3()).length()
+const center = box.getCenter(new THREE.Vector3())
+
+model.position.x += (model.position.x - center.x)
+model.position.y += (model.position.y - center.y)
+model.position.z += (model.position.z - center.z)
+
+/* CAMERA */
+
+camera.near = size / 100
+camera.far = size * 100
+camera.updateProjectionMatrix()
+
+camera.position.copy(center)
+camera.position.x += size
+camera.position.y += size
+camera.position.z += size
+
+controls.target.copy(center)
+controls.update()
 
 })
 
